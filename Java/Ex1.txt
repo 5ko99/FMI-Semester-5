@@ -1,0 +1,44 @@
+long l = 1L; - for creating long
+float f = 0.1; - will not compile because 0.1 by default it's long
+float f = 0.1F;
+
+0x-hexadecimal
+0b- binary
+0 - octa
+
+for readability
+int million = 1_000_000;
+
+Data types convert
+"1234" + 99 = "123499"
+(data_type) var; - for casting
+
+Wrapper types
+int - Integer - Class of int. Can be accessed as a class.
+
+Character c = 'a' // Autoboxing
+
+Strings
+They are immutable
+When you create String with new the String goes in to heap. With .intern() you move a string from heap to string pool(reference pool)
+Comparing Strings. with == you compare the reference of the strings. To compare content you need to use equals()
+Operations:
+    Concat with +
+
+In Java 15 you can use multi-line string
+String a = """
+                accessed
+                accessed
+                equals"""
+charAt(i) - no [i] like C/C++
+split("(separator)") - gives String[]
+
+New Switch Case Syntaxes 
+switch(a){
+    case "a" -> ...
+    case "b" -> ...
+    default -> ...
+}//Without need of using break
+Also switch can return value and to use it for init
+
+
