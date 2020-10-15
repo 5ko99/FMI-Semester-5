@@ -60,7 +60,7 @@
           (else (helper (quotient newN 10) (+ (* res 10) (last-digit newN))))))
   (helper n 0))
 
-(reverse-int 1234)
+(reverse-int 123)
 
 ;Zad 5
 (define (palindrome? n)
@@ -72,51 +72,12 @@
 ;Zad 8
 (define (prime? n)
   (define (helper i)
-    (cond ((> i (/ n 2)) #t)
-          ((not(= (remainder n i) 0)) (helper (+ i 1)))
+    (cond ((= i n) #t)
+          ((\= (remainder n i) 0) (helper (+ i 1)))
           (else #f)))
-  (if (> n 1)
-    (helper 2)
-    #f))
+  (helper 2))
 (prime? 97)
 
-;helper for getting the first digit
-(define (getFirstDigit n)
-  (if (>= n 10)
-      (getFirstDigit (quotient n 10))
-      n))
+      
 
-;Zad 9
-(define (increasing? n)
-  (define (helper newN last before-last)
-    (cond((= newN 0) #t)
-         ((> last before-last) (helper (quotient newN 10) before-last (last-digit (quotient newN 100))))
-         (else #f)))
-  (helper n (last-digit n) (last-digit (quotient n 10))))
-
-(increasing? 1235468)
-(increasing? 12489)
-(increasing? 4456)
-
-
-;Zad 11
-(define (toDecimal n)
-  (define (helper newN acc pow)
-    (cond((<= newN 0) acc)
-         (else (helper (quotient newN 10) (+ acc (* (last-digit newN) (fastPow 2 pow))) (+ pow 1)))))
-  (helper n 0 0))
-
-(toDecimal 101010)
-
-
-
-;Zad 10
-(define (toBinary n)
-  (define (helper newN res)
-    (cond((zero? newN) res)
-         (else (helper (quotient newN 2) (cons (remainder newN 2) res)))))
-  (helper n '()))
-
-(toBinary 8) ;-> 1000
-(toBinary 15) ;-> 1111
-(toBinary 42) ;-> 101010
+        
