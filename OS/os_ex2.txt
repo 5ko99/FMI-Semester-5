@@ -10,7 +10,7 @@ User Commands
   who - prints connected users
   whp am i - prints my user
   write (user) - sends message to user
-  mesg (y/n) - allow or deny messages with arguments, without prints
+  mesg (y/n) - allow or deny messages with arguments, without prints. ctrl + d end ot chat
   passwd - changes user password
 
 Directory Commands
@@ -34,13 +34,17 @@ Files Commands
   sort [-r] (file) - sorted view of the files. With option -r revers the sort
   tail [-number] (file) - last 10 rows// head -n5 (file)
   head [-number] - first 10 rows
-  wc (file) - number of rows, words and chars
-  cut [-c/-f] (file)- cuts part of every row of the file. With -c[num] from every row this symbol. If we want more we separate them with commas. 3-5 is interval
-                      with -f[num] we can use more flags. -d' ' means that we are using ' ' as a separator. num represents which field.
-  grep (word) (file) - search the word it the file and prints on witch row it is. Options -v invert(rows that do not have); -q quiet do not prints anything
+  wc (file) - number of rows, words and chars.
+  cut [-c/-f] (file)- cuts part of every row of the file. With -c[num] from every row this symbol. 
+                      If we want more we separate them with commas. 3-5 is interval
+                      with -f[num] we can use more flags. -d' ' means that we are using ' ' as a separator. 
+                      num represents which field.
+  grep (word) (file) - search the word it the file and prints on witch row it is. 
+                       Options -v invert(rows that do not have); -q quiet do not prints anything
   tr chars chars - replaces every char from first list to char from second one. -d delete only takes one set of chars. -s squize
   file (file) - gives info for the file.
   cmp (file) (file) - compares two files byte by byte; -s silent mode
   diff (file) (file) - compares two files row by row. Tells on which rows they are different
 
-  Important: When some commands have unneseccery parameter for file, when you execute them without this parameter they read the data from the standard input.
+  Important: When some commands have unnecessary parameter for file, when you execute 
+  them without this parameter they read the data from the standard input.
