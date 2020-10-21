@@ -1,0 +1,10 @@
+n=3 
+rows: 2*n=6
+columns: n*n+2(for aside) = 11
+
+┌─────────┐ - 9 inner, two aside
+│ ┌─────┐ │ - vertical then one space and two of them with 5 inner 
+│ │ ┌─┐ │ │ - vertical then space and vertical and one inner
+│ │ └─┘ │ │ - same as above, but with opposite aside
+│ └─────┘ │ - same as second, but with opposite aside
+└─────────┘ - same as first, but with opposite aside

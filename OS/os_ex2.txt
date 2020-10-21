@@ -1,4 +1,5 @@
 newkis.fmi.uni-sofia.bg/~svi/os
+User: s45546
 Pass: PetkoOs2020
 Commands
   date- prints the date
