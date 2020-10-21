@@ -1,5 +1,5 @@
 newkis.fmi.uni-sofia.bg/~svi/os
-
+Pass: PetkoOs2020
 Commands
   date- prints the date
   echo (text) - prints text
