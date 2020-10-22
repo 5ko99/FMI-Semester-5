@@ -1,6 +1,8 @@
 newkis.fmi.uni-sofia.bg/~svi/os
+Server: os-server.fmi.uni-sofia.bg
 User: s45546
 Pass: PetkoOs2020
+
 Commands
   date- prints the date
   echo (text) - prints text

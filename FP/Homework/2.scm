@@ -6,13 +6,16 @@
                 (+ pos 1))))
   (helper n 0 0))
 
+(define (toDecimal n)
+  (if (= n 0) 0
+      (+ (remainder n 10) (* 2 (toDecimal (quotient n 10))))))
+
 (define (set-add set elem)
   (+ set (expt 2 elem)))
 
 (define (set-remove set elem)
   (- set (expt 2 elem)))
 
-;to add check if set is empty
 (define (set-contains? set elem)
   (define asBin (toBinary set))
   (define (helper setN i)
@@ -35,4 +38,39 @@
           ((zero? (remainder setNew 10)) (helper (quotient setNew 10) count))
           ((one? (remainder setNew 10)) (helper (quotient setNew 10) (+ count 1)))))
   (helper asBin 0))
-    
+
+(define (set-intersect A B)
+  (define AasBin (toBinary A))
+  (define BasBin (toBinary B))
+  (define (helper An Bn res pos)
+    (cond ((or (set-empty? An) (set-empty? Bn)) (toDecimal res))
+          ((and (one? (remainder An 2)) (one? (remainder Bn 2)) (helper (quotient An 10) (quotient Bn 10) (+ res (* 1 (expt 10 pos))) (+ pos 1))))
+          (else (helper (quotient An 10) (quotient Bn 10) (+ res (* 0 (expt 10 pos))) (+ pos 1)))))
+    (helper AasBin BasBin 0 0))
+
+(define (set-union A B)
+  (define AasBin (toBinary A))
+  (define BasBin (toBinary B))
+  (define (helper An Bn res pos)
+    (cond ((and (set-empty? An) (set-empty? Bn)) (toDecimal res))
+          ((or (one? (remainder An 2)) (one? (remainder Bn 2))) (helper (quotient An 10) (quotient Bn 10) (+ res (* 1 (expt 10 pos))) (+ pos 1)))
+          (else (helper (quotient An 10) (quotient Bn 10) (+ res (* 0 (expt 10 pos))) (+ pos 1)))))
+    (helper AasBin BasBin 0 0))
+
+(define (set-difference A B)
+  (define AasBin (toBinary A))
+  (define BasBin (toBinary B))
+  (define (helper An Bn res pos)
+    (cond ((and (set-empty? An) (set-empty? Bn)) (toDecimal res))
+          ((and (one? (remainder An 2)) (zero? (remainder Bn 2))) (helper (quotient An 10) (quotient Bn 10) (+ res (* 1 (expt 10 pos))) (+ pos 1)))
+          (else (helper (quotient An 10) (quotient Bn 10) (+ res (* 0 (expt 10 pos))) (+ pos 1)))))
+    (helper AasBin BasBin 0 0))
+
+
+(define (knapsack c n w p)
+  (define (helper i set curPrice capLeft)
+    (cond ((>= i n) set)
+          ((> (w i) capLeft) (helper (+ i 1) set curPrice capLeft))
+          (else (max (helper (+ i 1) (set-add set i) (+ curPrice (p i)) (- capLeft (w i))) (helper (+ i 1) set curPrice capLeft) ) )))
+  (helper 0 0 0 c))
+(knapsack 10 20 (lambda (x) 1) (lambda (x) (if (even? x) 2 1)))

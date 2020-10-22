@@ -1,0 +1,65 @@
+* - extends to random num of symbols
+? - extends to one symbol 
+[] - extends to one of the symbols
+
+Redirection
+< - redirects the standard input
+> - redirects the standard output
+>> - redirects the standard output but with file extending
+2> - redirects the standard error output
+
+ls |wc -l - konvair
+tee file - read from standard input and write to the standard output and to file
+ls | tee temp.txt| wc -l
+
+Фонов (асинхронен) режим
+With &
+
+Код на завършване
+
+Всеки процес (команда) при завършването си изработва код на завършване и го връща към процеса 
+който го е породил. Код 0 означава успешно завършване, а код различен от 0 - неуспешно завършване или грешка. 
+echo$? code of the wast ended problem - 0 it's okay 
+                                        1 it's erro
+                                    
+Variables
+All varaibles are char[]. Also there is no need of initialization, they are init with "" by default
+Examples:
+a=abc
+to extract the value of a variable
+$a
+
+Command read - reads from standard input words separated by space, the first word is the value of first var, second of second and etc...
+if there are more vars than words -> other will be empty
+if there are more words than vars -> the var last will get all of it
+
+set- print Variables
+unset- exclude varaibles
+
+* - списък с параметрите от командния ред
+# - броя на параметрите от командния ред
+n - n-тия параметър от командния ред
+? - код на завършване на последния завършил процес
+! - номер (PID) на последния завършил процес във фонов режим
+HOME - началната директория на потребителя
+PATH - списък от директории в които се търсят команди за изпълнение
+PS1 - първичен "промпт"
+USER - името на потребителя
+
+Екраниращи символи (кавички)
+
+"текст" - екранира всички символи с изключение на $, ` и \
+\(symbol) - ekranira edin simvol napisan sled neq
+`command` - excecuting the command and it's output is putted in ``
+
+'текст' - екранира всички символи
+\символ - екранира следващия символ
+`команда` - замества конструкцията с изхода на командата
+
+Tasks
+1.
+    who|cut -c1-8
+    who | echo "Count is `wc -l`"
+
+2.
+
