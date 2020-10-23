@@ -66,11 +66,24 @@
           (else (helper (quotient An 10) (quotient Bn 10) (+ res (* 0 (expt 10 pos))) (+ pos 1)))))
     (helper AasBin BasBin 0 0))
 
+(define (id x) x)
+(define (double x) (+ x x))
+
+(define (set-price set p)
+    (define asBin (toBinary set))
+  (define (helper pos setNew price)
+    (cond ((set-empty? setNew) price)
+          ((zero? (remainder setNew 10)) (helper (+ pos 1) (quotient setNew 10) price))
+          ((one? (remainder setNew 10)) (helper (+ pos 1) (quotient setNew 10) (+ price (p pos))))))
+  (helper 0 asBin 0)
+ )
 
 (define (knapsack c n w p)
   (define (helper i set curPrice capLeft)
     (cond ((>= i n) set)
           ((> (w i) capLeft) (helper (+ i 1) set curPrice capLeft))
-          (else (max (helper (+ i 1) (set-add set i) (+ curPrice (p i)) (- capLeft (w i))) (helper (+ i 1) set curPrice capLeft) ) )))
+          (else
+           (if(> (set-price (helper (+ i 1) (set-add set i) (+ curPrice (p i)) (- capLeft (w i))) p) (set-price (helper (+ i 1) set curPrice capLeft) p))
+              (helper (+ i 1) (set-add set i) (+ curPrice (p i)) (- capLeft (w i)))
+              (helper (+ i 1) set curPrice capLeft)))))
   (helper 0 0 0 c))
-(knapsack 10 20 (lambda (x) 1) (lambda (x) (if (even? x) 2 1)))
