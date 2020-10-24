@@ -8,7 +8,7 @@ Redirection
 >> - redirects the standard output but with file extending
 2> - redirects the standard error output
 
-ls |wc -l - konvair
+ls |wc -l - pipe
 tee file - read from standard input and write to the standard output and to file
 ls | tee temp.txt| wc -l
 
@@ -62,4 +62,17 @@ Tasks
     who | echo "Count is `wc -l`"
 
 2.
-
+    write (user) < (file)
+3.
+    line1=$(head -n 2 file1)
+    line2=$(head -n 2 file2)
+    combined="$line1$line2"
+    echo $combined > toDel
+    sort toDel > result
+    rm toDel
+4.
+    grep "string" (file)
+    echo $?
+5.
+    diff file1 file2
+    echo $?
