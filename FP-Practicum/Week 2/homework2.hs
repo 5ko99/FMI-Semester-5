@@ -14,5 +14,3 @@ printLoop a b = helper a ""
             | mod i 5 == 0 = helper (i + 1) (result ++ "Bar\n")
             | otherwise = helper (i + 1) (result ++ (show i) ++ "\n")
             
-
---test

@@ -1,0 +1,19 @@
+#zad1
+x=c(8,3,8,7,15,9,12,4,9,10,5,1)
+m=matrix(x,nrow=4)
+rownames(m)=c('r1','r2','r3','r4')
+m=cbind(m,c(1,3,5,7))
+m.s1=m[order(m[,1]),]
+m.s2=m[order(m[,1],m[,2]),]
+#zad2
+library(UsingR)
+attach(homedata)
+max(y2000)
+min(y2000)
+y1970[which.max(y2000)]
+y1970[which.min(y2000)]
+sort(y2000,decreasing = T)[1:5]
+sum(y2000>750000)
+mean(y1970[y2000>750000])
+y2000[y2000<y1970]
+order((y2000-y1970)/y1970,decreasing=T)[1:10]
