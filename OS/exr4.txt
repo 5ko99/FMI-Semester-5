@@ -1,0 +1,32 @@
+cmd1 && cmd2 &&... - execute cmd n only if cmd (n-1) finished successfully
+cmd || cmd2... - execute cmd n only if cmd (n-1) finished unsuccessfully
+
+Expressions
+expr (ar. expr) - computes the expr
+for multiplying we need to use \* or '*'
+length (string)
+index (string) (symbols) - the index where found first index
+substr (string) pos length
+example:
+expr substr abcdefgh 2 4
+
+Format symbols
+\n - new line
+\t - tabulation
+\c - stay on the same row
+to yse this we need to use echo with -e:
+echo -e "a\nb"
+
+Скрити файлове
+
+Файлове чиито имена започват с точка(.) са скрити - не се извеждат от командата ls и при използване на *
+ls -a [дир] - показва всички (и скритите) файлове
+
+.bash_profile - командна процедура, която се изпълнява всеки път при логическо включване
+По-интересни системни файлове
+
+/etc/passwd - файл с информация за регистрираните в системата потребители
+/dev/null - празен файл. Удобен за пренасочване на входа и изхода
+
+empty file-black hole
+/dev/null

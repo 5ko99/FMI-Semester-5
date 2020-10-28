@@ -1,0 +1,15 @@
+Zad3
+read file1 file2 file3
+cat $file $file2 | sort > $file3
+
+Zad1
+read user
+who|grep $user|wc -l
+
+Zad2.
+who | grep $user >/dev/null && write $user <$file
+
+Zad3.
+a=`wc -l < $file`
+b=`wc -w < $file`
+expr $b "/" $a
