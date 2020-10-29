@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.mjt.revolut.card;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class VirtualOneTimeCard implements Card {
     private static final String TYPE = "VIRTUALONETIME";
@@ -44,5 +45,10 @@ public class VirtualOneTimeCard implements Card {
 
     public boolean equals(Card card){
         return this.number.equals(card.getNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.number);
     }
 }

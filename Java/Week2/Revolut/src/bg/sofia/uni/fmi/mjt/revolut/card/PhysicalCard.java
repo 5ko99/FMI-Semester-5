@@ -1,6 +1,7 @@
 package bg.sofia.uni.fmi.mjt.revolut.card;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class PhysicalCard implements Card {
     private static final String TYPE = "PHYSICAL";
@@ -46,5 +47,10 @@ public class PhysicalCard implements Card {
     @Override
     public boolean equals(Card card){
         return this.number.equals(card.getNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.number);
     }
 }

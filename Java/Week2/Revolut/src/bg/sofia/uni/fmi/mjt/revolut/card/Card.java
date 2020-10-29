@@ -32,4 +32,6 @@ public interface Card {
     String getNumber();
 
     boolean equals(Card card);
+
+    int hashCode();
 }

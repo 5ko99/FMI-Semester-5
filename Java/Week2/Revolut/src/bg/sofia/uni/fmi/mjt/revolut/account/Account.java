@@ -21,8 +21,12 @@ public abstract class Account {
     }
 
     public boolean withdraw(double amount){
-       this.amount-=amount;
-       return true;
+        if(this.amount - amount >= 0){
+            this.amount-=amount;
+            return true;
+        } else{
+            return false;
+        }
     }
 
     public boolean topUp(double amount){
