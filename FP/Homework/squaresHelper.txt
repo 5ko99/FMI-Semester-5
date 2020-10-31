@@ -2,9 +2,15 @@ n=3
 rows: 2*n=6
 columns: n*n+2(for aside) = 11
 
-┌─────────┐ - 9 inner, two aside
-│ ┌─────┐ │ - vertical then one space and two of them with 5 inner(1-vertical,2-space,3-aside,4:8-horizontal,9-aside,10-space,11-vertical)
-│ │ ┌─┐ │ │ - vertical then space and vertical and one inner
-│ │ └─┘ │ │ - same as above, but with opposite aside
-│ └─────┘ │ - same as second, but with opposite aside
-└─────────┘ - same as first, but with opposite aside
+0)┌─────────┐ - 9 inner, two aside
+1)│ ┌─────┐ │ - vertical then one space and two of them with 5 inner(1-vertical,2-space,3-aside,4:8-horizontal,9-aside,10-space,11-vertical)
+2)│ │ ┌─┐ │ │ - vertical then space and vertical and one inner
+3)│ │ └─┘ │ │ - same as above, but with opposite aside
+4)│ └─────┘ │ - same as second, but with opposite aside
+5)└─────────┘ - same as first, but with opposite aside
+
+left angle up - {<0,0><1,2>,<2,4>}
+left angle down - {<3,4>,<4,2>,<5,0>}
+
+right angle up - {<0,10>,<1,8>,<2,6>}
+right angle down - {<3,6>,<4,8>,<5,10}

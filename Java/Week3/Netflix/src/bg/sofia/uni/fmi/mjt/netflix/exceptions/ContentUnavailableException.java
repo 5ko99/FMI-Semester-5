@@ -1,6 +1,8 @@
 package bg.sofia.uni.fmi.mjt.netflix.exceptions;
 
-public class ContentUnavailableException extends Exception {
+import java.security.AccessControlException;
+
+public class ContentUnavailableException extends AccessControlException {
     public ContentUnavailableException(String errMsg){
         super(errMsg);
     }
