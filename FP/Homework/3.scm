@@ -28,6 +28,14 @@
         ((eq? c #\^) #t)
         (else #f)))
 
+(define (op-pr c)
+  (cond ((string=? c "+") 0)
+        ((string=? c "*") 1)
+        ((string=? c "-") 0)
+        ((string=? c "/") 1)
+        ((string=? c "^") 2)
+        (else -1)))
+
 (define (is-space? c)
   (if (eq? c #\space)
       #t
@@ -72,16 +80,44 @@
 
 
 (define (expr-rp expr)
-  (define res (expr-rp-helper expr))
-  (substring res 1 (string-length res) ))
+  (expr-rp-helper expr))
 
 (define (expr-rp-helper exprI)
   (expr-valid? exprI)
   (define expr (clear-spaces exprI))
-  (define (loop i signs nums cur-num)
-    (cond  ((= i (string-length expr)) (string-append nums sep cur-num (string-reverse signs)))
-           ((is-sign? (string-ref expr i)) (loop (+ i 1) (string-append signs (make-string 1 (string-ref expr i))) (string-append nums sep cur-num) ""))
-           (else (loop (+ i 1) signs nums (string-append cur-num (make-string 1 (string-ref expr i)))))
+  (define (helper new-signs token)
+                  (if (or (is-empty? new-signs) (< (op-pr (top new-signs)) (op-pr token)))
+                      (begin (display sep) (push new-signs token))
+                      (begin (display (top new-signs)) (helper (pop new-signs) token))))
+  
+  (define (loop i signs)
+    (define token (if (< i (string-length expr))
+                      (make-string 1 (string-ref expr i))
+                      -1))
+    
+    (cond  ((= i (string-length expr)) (display signs))
+           ((is-sign? (string-ref expr i))
+            (begin  (if (or (is-empty? signs) (> (op-pr token) (op-pr (top signs)) ))
+                (begin (display sep) (loop (+ i 1) (push signs token)))
+                (loop (+ i 1) (helper signs token)))))
+           (else (begin (display token) (loop (+ i 1) signs (string-append (make-string 1 (string-ref expr i))))))
            ))
-  (loop 0 "" "" ""))
+  (loop 0 ""))
+
+;stack
+(define (top s)
+  (if (is-empty? s)
+      -1
+      (make-string 1 (string-ref s 0))))
+
+(define (push s c)
+  (string-append c s))
+
+(define (is-empty? s)
+  (zero? (string-length s)))
+
+(define (pop s)
+  (if (is-empty? s)
+      -1
+      (substring s 1 (string-length s))))
   
