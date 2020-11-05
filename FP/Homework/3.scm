@@ -1,13 +1,3 @@
-; преобразува до низ
-;(string #\a) --> "a"
-; намира дължина на низ
-;(string-length "abc") --> 3
-; извлича елемент намиращ се на даден индекс
-;(string-ref "abc" 1) --> #\b
-; конкатенира два низа
-;(string-append "abc" "def") --> "abcdef"
-;(substring "abc" 1 3)
-
 ;Помощни функции и константи
 (define sep ",")
 (define (is-digit? c)
@@ -54,15 +44,15 @@
 
 ;stack имплементация, леко модифициран, защото имаме достъп и до вторият параметър на върха,
 ;това го правя за улеснение при изчисиление на израз, когато трябва да вземем най-горните 2 елемента
-;от върха на стека
+;от върха на стека. Наистина ненужно е, но с цел по добра четимост
 (define (push s el)
   (string-append el sep s))
 
 (define (top s)
   (define (loop i res)
-    (if (or (= i (string-length s)) (string=? (make-string 1 (string-ref s i)) sep))
+    (if (or (= i (string-length s)) (string=? (string (string-ref s i)) sep))
         res
-        (loop (+ i 1) (string-append res (make-string 1 (string-ref s i))))
+        (loop (+ i 1) (string-append res (string (string-ref s i))))
         ))
   (if (is-empty? s) #f
       (loop 0 "")))
@@ -77,7 +67,7 @@
    (define (loop i count)
     (cond ((>= count 2) #f)
           ((= i (string-length s)) #t)  
-          ((string=? (make-string 1 (string-ref s i)) sep) (loop (+ i 1) (+ count 1)))
+          ((string=? (string (string-ref s i)) sep) (loop (+ i 1) (+ count 1)))
           (else (loop (+ i 1) count))))
   (loop 0 0))
   
@@ -106,48 +96,32 @@
           (else (helper newStr (+ i 1)))))
   (helper str 0))
 
-;Помощна функция в която съм изнесъл логиката на expr-rp
-(define (expr-rp-helper exprI)
-  (define expr (clear-spaces exprI))
-  (define (helper new-signs token)
-                  (if (or (is-empty? new-signs) (< (op-pr (top new-signs)) (op-pr token)))
-                      (begin (display sep) (push new-signs token))
-                      (begin (display (top new-signs)) (helper (pop new-signs) token))))
-  (define (loop i signs)
-    (define token (if (< i (string-length expr))
-                      (make-string 1 (string-ref expr i))
-                      -1))
-    (cond  ((= i (string-length expr)) (display signs))
-           ((is-operand? token)
-            (if (or (is-empty? signs) (> (op-pr token) (op-pr (top signs)) ))
-                (begin (display sep) (loop (+ i 1) (push signs token)))
-                (loop (+ i 1) (helper signs token))))
-           (else (begin (display token) (loop (+ i 1) signs )))))
-  (loop 0 ""))
-
-;Функционалността за изчисление на израз
-
 ;функция за изчисление на токена
 (define (tokenEval i j cur expr)
       (cond ((>= j (string-length expr)) cur)
-            ((and (= i j) (is-operand? (make-string 1 (string-ref expr j)))) (make-string 1 (string-ref expr j)))
-            ((and (not (= i j)) (is-operand? (make-string 1(string-ref expr j)))) cur)
-            (else (tokenEval i (+ j 1) (string-append cur (make-string 1 (string-ref expr j))) expr))))
-;todo: remove code repettition
+            ((and (= i j) (is-operand? (string (string-ref expr j)))) (string (string-ref expr j)))
+            ((and (not (= i j)) (is-operand? (string(string-ref expr j)))) cur)
+            (else (tokenEval i (+ j 1) (string-append cur (string (string-ref expr j))) expr))))
+
+;Помощна функция в която съм изнесъл логиката на expr-rp
+(define (expr-rp-helper exprI)
+  (define expr (clear-spaces exprI))
+  (define (loop i signs res)
+    (define token (tokenEval i i "" expr))
+    (cond  ((= i (string-length expr)) (string-append res signs))
+           ((is-operand? token)
+            (if (or (is-empty? signs) (> (op-pr token) (op-pr (top signs)) ))
+                (loop (+ i 1) (push signs token) (string-append res sep))
+                (loop i (pop signs) (string-append res (top signs)))))
+           (else (loop (+ i (string-length token)) signs (string-append res token )))))
+  (loop 0 "" ""))
+
+;Функционалността за изчисление на израз
 (define (expr-eval-helper exprI)
   (define expr (clear-spaces exprI))
   (define (loop i signsStack valuesStack)
     (define token (tokenEval i i "" expr))
-    (cond ((and (= i (string-length expr)) (not (is-empty? signsStack)))
-           (let* ((A (string->number (top valuesStack)))
-                  (B (string->number (top-top valuesStack)))
-                  (op (top signsStack))
-                  (result ((string->procedure op) B A)))
-             (loop i (pop signsStack) (push (pop-pop valuesStack) (number->string result))))
-           )
-          ((= i (string-length expr))
-             (top valuesStack))
-          ((is-operand? token)
+    (cond ((or (and (= i (string-length expr)) (not (is-empty? signsStack))) (is-operand? token))
            (if (or (is-empty? signsStack) (> (op-pr token) (op-pr (top signsStack))))
                (loop (+ i 1) (push signsStack token) valuesStack)
                (let* ((A (string->number (top valuesStack)))
@@ -156,16 +130,18 @@
                       (result ((string->procedure op) B A)))
                  (loop i (pop signsStack) (push (pop-pop valuesStack) (number->string result))))
                ))
+          ((= i (string-length expr))
+           (top valuesStack))
           (else (loop (+ i (string-length token)) signsStack (push valuesStack token)))))
   (loop 0 "" ""))
-
 
 
 ;Основни функции
 (define (expr-rp expr)
   (if (expr-valid? expr)
-      (expr-rp-helper expr)
-      (display #f)))
+      (let* ((res (expr-rp-helper expr)))
+             (substring res 0 (- (string-length res) 1)))
+      (#f)))
 
 ;0-> space or digit//in the beggining,after sign or space but before that sign
 ;1->sapce or digit or sign// after digit
@@ -175,7 +151,7 @@
   (define (helper i next canEnd? )
     (cond ((= (string-length str) i) canEnd?)
           ((and (is-digit? (string-ref str i)) (< next 2)) (helper (+ i 1) 1 #t))
-          ((and (is-operand? (make-string 1 (string-ref str i))) (> next 0)) (helper (+ i 1) 0 #f))
+          ((and (is-operand? (string (string-ref str i))) (> next 0)) (helper (+ i 1) 0 #f))
           ((and (is-space? (string-ref str i)) (= next 1)) (helper (+ i 1) 2 canEnd?))
           ((and (is-space? (string-ref str i)) (= next 0)) (helper (+ i 1) 0 canEnd?))
           ((and (is-space? (string-ref str i)) (= next 2)) (helper (+ i 1) 2 canEnd?))
@@ -184,8 +160,8 @@
 
 (define (expr-eval expr)
   (cond ((not (expr-valid? expr)) #f)
-        ((zero? (string-length expr)) (display 0))
-        (else (display (expr-eval-helper expr)))
+        ((zero? (string-length expr)) 0)
+        (else (expr-eval-helper expr))
         ))
 
 
