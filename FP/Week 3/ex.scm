@@ -77,4 +77,20 @@
 (define downLeft "\u2514")
 (define downRight "\u2518")
 (define space " ")
+
+(define (e^x x n)
+  (accumulate + 0 0 n (lambda (i) (/ (expt x i) (! i))) 1+)
+  )
+
+(define (sum-of-digits n)
+  (define (loop n1 sum)
+    (if (= n1 0)
+        sum
+        (loop (quotient n1 10) (+ sum (remainder n1 10)))
+        )
+    )
+  (loop n 0))
+
+(define (arm a b)
+  (filter-accum (lambda (x) (odd? (sum-of-digits x))) + 0 a b id 1+)) 
         
