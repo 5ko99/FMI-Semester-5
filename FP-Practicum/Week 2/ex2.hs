@@ -58,3 +58,6 @@ vecLen (x, y) = sqrt (x * x + y * y)
 
 normalized :: Floating b => (b, b) -> (b, b)
 normalized v@(x, y) = let l = vecLen v in (x / l, y / l)
+
+a=(1,2)
+b=[1,2,3]

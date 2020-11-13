@@ -1,0 +1,6 @@
+#lang racket
+(define (unique lst)
+  (if [null? lst] '()
+      (if (member (head lst) (uniques (tail lst)))
+          (cons (head lst) (uniques (tail lst))))))
+                    
