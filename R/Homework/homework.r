@@ -19,7 +19,13 @@ boxplot(sort(wt1) ~ inc,subset = c(1:length(MotherWt)),na.rm=T,
         main="Тегло на майките според 
         дохода на семейството")
 
+# разбиване в категории
+f = cut(race,c((-1:5),(6),(7),(8),(9)))
+levels(f) = c("Бяла","Бяла","Бяла","Бяла","Бяла","Бяла","Друга","Черна","Друга","Друга")
+f
+
 # д)
-factor(race,levels=race[race==7])
-f = cut(race,c((-1:5),(7)))
-levels(f) = c("a","a","a","a","a","a","b")
+plot(smoke ~ f,ylim=c(0,3),na.rm=T,horizontal=T,main="Пушене според расата",xlab="Раса",ylab="Пушене")
+
+# e)
+plot(wt1 ~ f,ylim=c(85,252),horizontal=T,main="Тегло според расата",xlab="Раса",ylab="Тегло")
