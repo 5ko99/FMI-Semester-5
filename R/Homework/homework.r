@@ -26,6 +26,41 @@ f
 
 # д)
 plot(smoke ~ f,ylim=c(0,3),na.rm=T,horizontal=T,main="Пушене според расата",xlab="Раса",ylab="Пушене")
+barplot(race ~ smoke)
 
 # e)
 plot(wt1 ~ f,ylim=c(85,252),horizontal=T,main="Тегло според расата",xlab="Раса",ylab="Тегло")
+
+
+# Зад. 2
+stickers = function( N = 40 ) {
+  x = sample( 1 : 20, N, replace = T )
+  arr = rep.int(F,20)
+  for(i in 1:N) {
+    arr[x[i]] = T
+  }
+  for(i in 1:20) {
+    if(arr[i]==F) return(F);
+  }
+  return(T);
+}
+
+rep.stickers = function( n ) {
+  c = 0
+  for( i in 1 : n)
+    c = c + stickers()
+  return(c)
+}
+
+prob.stickers = function( n ) {
+  x = rep.int(0,n)
+  c = 0
+  for(i in 1 : n ) {
+    c = c + stickers()
+    x[ i ] = c / (1 * i )
+  }
+  return(x)
+}
+x = prob.stickers(100000)
+plot(x,type="l")
+abline(h = 7/200, col = 'red' )
