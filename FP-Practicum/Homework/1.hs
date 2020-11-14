@@ -38,3 +38,8 @@ squares n = putStrLn $ helper n n
   where
     helper _ 0 = ""
     helper n k = printRowUp n k ++ helper n (k - 1) ++ printRowDown n k
+
+--testing
+main :: IO ()
+main = do
+  squares 8
