@@ -80,18 +80,17 @@ getResults studentsScores disciplines = catMaybes $ [helper discipline studentsS
         curStScore = head stScores
         grade = getScore curStScore
 
---last
-getAboveAverageStudents :: [StudentScore] -> [Student] -> [Discipline] -> [Maybe Student] -> [Maybe Student]
-getAboveAverageStudents _ [] _ res = res
-getAboveAverageStudents studentScores students disciplines res  =
-    getAboveAverageStudents studentScores (tail students) disciplines (getAboveAverageStudentsHelper scoresByCourse  student avr : res)
+--Third Part
+getAboveAverageStudentsW :: [StudentScore] -> [Student] -> [Discipline] -> [Maybe Student] -> [Maybe Student]
+getAboveAverageStudentsW _ [] _ res = res
+getAboveAverageStudentsW studentScores students disciplines res  =
+    getAboveAverageStudentsW studentScores (tail students) disciplines (getAboveAverageStudentsHelper scoresByCourse  student avr : res)
     where
       student = head students
       studentCourse = getStudentCourse student
       curStudentScores = [ss| ss<-studentScores, getScoreFn ss == getStudentFn student]
       scoresByCourse = getScoresByCourse curStudentScores disciplines studentCourse
       avr = getResults studentScores disciplines
-
 
 getAboveAverageStudentsHelper :: [StudentScore] -> Student -> [(DisciplineName, DisciplineID, Score)] -> Maybe Student
 getAboveAverageStudentsHelper [] student _ = Just student
@@ -125,18 +124,22 @@ getDisciplineById :: [Discipline] -> DisciplineID -> Maybe Discipline
 getDisciplineById [] _ = Nothing
 getDisciplineById (h : t) x = if getDisciplineID h == x then Just h else getDisciplineById t x
 
+getAboveAverageStudents :: [StudentScore] -> [Student] -> [Discipline] -> [Student]
+getAboveAverageStudents studentScores students disciplines = 
+  catMaybes $ getAboveAverageStudentsW studentScores students disciplines []
+
 --Testing
 a :: [StudentScore]
 a = [("46", 6, "1"), ("45", 3, "1"), ("46", 6, "2"), ("44", 4, "1"), ("45", 2, "2"), ("44", 3, "2"), ("44", 5, "3"), ("46", 6, "4"),("45",3,"4"), ("44", 4, "5"), ("45", 5, "5")]
 
 b :: [Student]
-b = [("Petko", "Kamenov", "46", 3), ("Alex", "Turner", "45", 3), ("John", "Lennon", "44", 3)]
+b = [("Petko", "Kamenov", "46", 3), ("Alex", "Turner", "45", 2), ("John", "Lennon", "44", 3)]
 
 c :: DisciplineID
 c = "5"
 
 d :: [Discipline]
-d = [("Haskell", "1", 3), ("Python", "2", 3), ("C++", "3", 3), ("C#", "4", 3), ("Java", "5", 3)]
+d = [("Haskell", "1", 3), ("Python", "2", 3), ("C++", "3", 3), ("C#", "4", 3), ("Java", "5", 2)]
 
 f :: [StudentScore]
 f = [("46", 6, "1"), ("44", 5, "1"), ("43", 2, "1")]
@@ -149,3 +152,4 @@ main = do
   putStr "\n"
   putStr $ show $ getResults f d
   putStr "\n"
+  putStr $ show $ getAboveAverageStudents a b d
