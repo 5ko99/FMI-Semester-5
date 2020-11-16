@@ -42,4 +42,5 @@ squares n = putStrLn $ helper n n
 --testing
 main :: IO ()
 main = do
-  squares 8
+  input <- getLine
+  let n = (read input :: Integer) in squares n

@@ -39,7 +39,6 @@ pie(tableOthers[ ,2],labels=lbls, main = "Пушене на другите ма�
 # e)
 f = cut(race,c((-1:5),(6),(7),(8),(9)))
 levels(f) = c("Бяла","Бяла","Бяла","Бяла","Бяла","Бяла","Друга","Черна","Друга","Друга")
-#f
 wt1[which(wt1==999)]=NA
 plot(wt1 ~ f,horizontal=T,main="Тегло според расата",xlab="Раса",ylab="Тегло")
 
@@ -52,23 +51,15 @@ allStickers = function(arr) {
   return(T);
 }
 
-stickers = function() {
-  N = 20;
-  x = sample(1:20,N,replace=T);
-  arr = rep.int(F,20);
-  for(i in 1:N) {
-    arr[x[i]] = T;
-  }
-  N = N + 1;
+stickers = function(N = 20) {
+  arr = rep.int(F,N);
+  tries = 0;
   while (!allStickers(arr)) {
-    x = sample(1:20,N,replace=T);
-    arr = rep.int(F,20);
-    for(i in 1:N) {
-      arr[x[i]] = T;
-    }
-    N = N + 1;
+    x = sample(1:20,1);
+    arr[x]=T;
+    tries = tries + 1;
   }
-  return(N);
+  return(tries);
 }
 
 prob.stickers = function( n ) {
@@ -82,4 +73,4 @@ prob.stickers = function( n ) {
 }
 x = prob.stickers(10000)
 plot(x,type="l",ylab = "Брой закупени стикери",xlab = "Опити")
-abline(h = 48.34, col = 'red' )
+abline(h = 71.8, col = 'red' )
