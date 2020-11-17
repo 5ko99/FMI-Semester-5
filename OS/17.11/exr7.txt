@@ -1,0 +1,1 @@
+umask [mask] - shows/sets modes for access for newly created files 

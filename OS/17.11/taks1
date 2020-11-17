@@ -1,0 +1,16 @@
+dir1 = $1
+dir2 = $2
+x=`ls $1/*.out | wc -l'
+y=`ls $2/*.out | wc -l'
+if test $x -gt $y
+then
+    mkdir newDir
+    echo newDir
+    for curFile in $dir1/*
+    do
+        if test -f $curFile -a -r $curFile -a -w curFile
+        then
+            mv curFile newDir
+        fi
+    done
+fi
