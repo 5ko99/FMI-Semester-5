@@ -1,0 +1,10 @@
+#lang racket
+(define head car)
+(define tail cdr)
+;map,filter,foldr,any?,all?,drop,take,dropWhile,takeWhile
+
+(define (dropWhile p? lst)
+  (cond [(nill? lst) '()]
+        [(p? (head lst)) (dropWhile p? (tals lst))]
+        [else lst]
+        ))
