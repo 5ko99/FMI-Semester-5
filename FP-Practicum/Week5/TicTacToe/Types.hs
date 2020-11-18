@@ -12,9 +12,11 @@ type Position = (Int, Int)
 
 data GameState
   = GameOver
-      { getWinner :: Maybe Player
+      { getBoard :: Board,
+        getWinner :: Maybe Player
       }
   | Turn
       { getBoard :: Board,
         getPlayer :: Player
       }
+  deriving (Show)
