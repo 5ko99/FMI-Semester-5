@@ -124,7 +124,7 @@
     (cond ((or (and (= i (string-length expr)) (not (is-empty? signsStack))) (is-operand? token))
            (if (or (is-empty? signsStack) (> (op-pr token) (op-pr (top signsStack))))
                (loop (+ i 1) (push signsStack token) valuesStack)
-               (let* ((A (string->number (top valuesStack)))
+              (let* ((A (string->number (top valuesStack)))
                       (B (string->number (top-top valuesStack)))
                       (op (top signsStack))
                       (result ((string->procedure op) B A)))
