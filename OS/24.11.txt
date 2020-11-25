@@ -1,0 +1,3 @@
+ps -ef | cut -c10-15
+ps -ef | cut -c1-10 | sort -u
+ps -fe | grep root  | cut -c1-10,10-15

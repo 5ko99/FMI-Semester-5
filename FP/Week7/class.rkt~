@@ -1,0 +1,7 @@
+#lang racket
+(define (sub-range i j lst)
+  (drop (take lst j) i))
+
+(define (sub-matrix i1 j1 i2 j2 m)
+  (let [(the-rows (sub-range i1 i2 m))]
+    (map (lambda (row) (sub-range j1 j2 row)) the-rows)))

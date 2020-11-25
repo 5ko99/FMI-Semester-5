@@ -4,20 +4,75 @@
 (require "tree.rkt")
 (test/gui
  (test-suite
-  "tree? testes"
-  (test-case "Valid Trees"
-             (check-true (tree? "{5 * {2 * *}}"))
-             (check-true(tree? "{2**}"))
-             (check-true(tree? "{2     {4     * *}               *}"))
-             (check-true(tree? "*"))
-             )
-  
-  (test-case "UnvalidTrees"
-              (check-false (tree? "{5 * {2 * *}"))
-              (check-false (tree? "{5 * {*}}"))
-              (check-false (tree? "abcd"))
-              (check-false (tree? "{2 *{3 * *} {3 * {2 *}"))
-              (check-false (tree? "{2 {2 * * *} *}"))
-              )
+  "tree?"
+  (test-true "valid *" (tree? "*"))
+  (test-true "valid {5 * {2 * *}}" (tree? "{5 * {2 * *}}"))
+  (test-true "valid {2**}" (tree? "{2**}"))
+  (test-true "valid {2     {4     * *}               *}" (tree? "{2     {4     * *}               *}"))
+  (test-false "unvalid {5 * {2 * *}" (tree? "{5 * {2 * *}"))
+  (test-false "unvalid {5 * {*}}" (tree? "{5 * {*}}"))
+  (test-false "unvalid abcd" (tree? "abcd"))
+  (test-false "unvalid {2 *{3 * *} {3 * {2 *}" (tree? "{2 *{3 * *} {3 * {2 *}"))
+  (test-false "unvalid {2 {2 * * *} *}" (tree? "{2 {2 * * *} *}"))
+  )
+
+ (test-suite
+  "string->tree"
+  (test-equal? "*" (string->tree "*") '())
+  (test-equal? "{5 {22 {2 * *} {6 * *}} {1 * {3 {111 * *} *}}}" (string->tree "{5 {22 {2 * *} {6 * *}} {1 * {3 {111 * *} *}}}") '(5 (22 (2 () ()) (6 () ())) (1 () (3 (111 () ()) ()))))
+  (test-equal? "{1 * {3 {111 * *} *}}" (string->tree "{1 * {3 {111 * *} *}}") '(1 () (3 (111 () ()) ())))
+  (test-equal? "{11515 {5 {6 {7 * *} *} {100 * *}} *}" (string->tree "{11515 {5 {6 {7 * *} *} {100 * *}} *}") '(11515 (5 (6 (7 () ()) ()) (100 () ())) ()))
+  (test-equal? "{123 {2 * *} *}" (string->tree "{123 {2 * *} *}") '(123 (2 () ()) ()))
+  (test-equal? "{1 {22 {9 * *} {8 * *}} {87 * {74 * *}}}" (string->tree "{1 {22 {9 * *} {8 * *}} {87 * {74 * *}}}") '(1 (22 (9 () ()) (8 () ())) (87 () (74 () ()))))
+  )
+
+ (test-suite
+  "tree->string"
+  (test-equal? "'()" (tree->string (string->tree "*")) "*")
+  (test-equal? "'(2 () ())" (tree->string '(2 () ())) "{2 * *}")
+  (test-equal? "'(2 (1 () ()) (3 () ()))" (tree->string '(2 (1 () ()) (3 () ()))) "{2 {1 * *} {3 * *}}")
+  (test-equal? "'(5 (22 (2 () ()) (6 () ())) (1 () (3 (111 () ()) ())))" (tree->string (string->tree "{5 {22 {2 * *} {6 * *}} {1 * {3 {111 * *} *}}}")) "{5 {22 {2 * *} {6 * *}} {1 * {3 {111 * *} *}}}")
+  (test-equal? "'(1 () (3 (111 () ()) ())))" (tree->string (string->tree "{1 * {3 {111 * *} *}}")) "{1 * {3 {111 * *} *}}")
+  (test-equal? "'(11515 (5 (6 (7 () ()) ()) (100 () ())) ())" (tree->string (string->tree "{11515 {5 {6 {7 * *} *} {100 * *}} *}")) "{11515 {5 {6 {7 * *} *} {100 * *}} *}")
+  (test-equal? "'(123 (2 () ()) ())" (tree->string (string->tree "{123 {2 * *} *}")) "{123 {2 * *} *}")
+  (test-equal? "'(1 (22 (9 () ()) (8 () ())) (87 () (74 () ())))" (tree->string (string->tree "{1 {22 {9 * *} {8 * *}} {87 * {74 * *}}}")) "{1 {22 {9 * *} {8 * *}} {87 * {74 * *}}}")
+  )
+
+ (test-suite
+  "height"
+  (test-equal? "'(2 (3 () ()) (8 (2 () ()) (5 () ()))))" (height '(2 (3 () ()) (8 (2 () ()) (5 () ())))) 3)
+  (test-equal? "'(2 (2 () ()) ()))" (height '(2 (2 () ()) ())) 2)
+  )
+
+ (test-suite
+  "balanced?"
+  (test-true "valid '()" (balanced? '()))
+  (test-true "valid '(2 (3 () ()) ()))" (balanced? '(2 (3 () ()) ())))
+  (test-true "valid '(2 (3 (4 () ()) ()) (4 () ())))" (balanced? '(2 (3 (4 () ()) ()) (4 () ()))))
+  (test-true "valid '(1 (2 (4 () ()) ()) (3 (5 (6 () ()) ()) (7 () ()))))" (balanced? '(1 (2 (4 () ()) ()) (3 (5 (6 () ()) ()) (7 () ())))))
+  (test-true "valid '(1 (2 (4 () ()) ()) (3 (5 (6 () ()) ()) (7 () ()))))" (balanced? '(1 (2 (4 () ()) ()) (3 (5 (6 () ()) ()) (7 () ())))))
+  (test-false "unvalid '(2 (3 (4 () ()) ()) ()))" (balanced? '(2 (3 (4 () ()) ()) ())))
+  (test-false "unvalid '(1 (2 (4 () ()) ()) (3 (5 (6 () ()) ()) ())))" (balanced? '(1 (2 (4 () ()) ()) (3 (5 (6 () ()) ()) ()))))
+  (test-false "unvalid '(2 (4 () ()) (22 () (33 (4 () ()) ())) )))" (balanced? '(2 (4 () ()) (22 () (33 (4 () ()) ())) )))
+  (test-false "unvalid '(4 (2 (4 () ()) (22 () (33 (4 () ()) ())) ) (8 (7 () ()) (99 () (55 (48 () ()) ()))))"
+              (balanced? '(4 (2 (4 () ()) (22 () (33 (4 () ()) ())) ) (8 (7 () ()) (99 () (55 (48 () ()) ())))) ))
+  (test-false "unvalid '(4 (2 (4 () ()) (22 () (33 (4 () ()) ())) ) (8 (7 () ()) (99 () (55 (48 (33 () ()) (68 () ())) ()))))"
+              (balanced? '(4 (2 (4 () ()) (22 () (33 (4 () ()) ())) ) (8 (7 () ()) (99 () (55 (48 (33 () ()) (68 () ())) ())))) ))
+  )
+
+ (test-suite
+  "ordered?"
+  (test-true "valid '()" (ordered? '()))
+  (test-true "valid '(2 () ())" (ordered? '(2 () ())))
+  (test-true "valid '(8 (6 () ()) ())" (ordered? '(8 (6 () ()) ()) ))
+  (test-true "valid '(8 () (9 () ()))" (ordered? '(8 () (9 () ())) ))
+  (test-true "valid '(8 (6 () ()) (9 () ()))" (ordered? '(8 (6 () ()) (9 () ())) ))
+  (test-true "valid '(10 (5 (4 () ()) (12 (11 () ()) (841 () ()))) (5 () ())))" (ordered? '(10 (5 (4 () ()) (12 (11 () ()) (841 () ()) )) (28 (14 () ()) (30 (-25 () ()) ()))) ))
+  (test-false "unvalid '(8 (9 () ()) (8 () ()))" (ordered? '(8 (9 () ()) (8 () ())) ))
+  (test-false "unvalid '(10 (5 (4 () ()) (12 (11 () ()) (841 () ()) )) (28 (14 () ()) (30 (250 () ()) ())))"
+              (ordered? '(10 (5 (4 () ()) (12 (11 () ()) (841 () ()) )) (28 (14 () ()) (30 (250 () ()) ()))) ))
+  (test-false "unvalid '(5 (6 () ()) ())" (ordered? '(5 (6 () ()) ()) ))
+  (test-false "unvalid (5 (3 () ()) (4 () ()))" (ordered? '(5 (3 () ()) (4 () ())) ))
+  (test-false "unvalid '(2 (1 () ()) (3 () (2 () ())))" (ordered? '(2 (1 () ()) (3 () (2 () ()))) ))
   )
  )
