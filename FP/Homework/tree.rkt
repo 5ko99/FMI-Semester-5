@@ -1,5 +1,6 @@
 #lang racket
 (require racket/trace)
+(require racket/stream)
 
 (define head car)
 (define tail cdr)
@@ -22,7 +23,26 @@
         ((eq? c #\9) #t)
         (else #f)))
 
+;constants for tree traverse 
+(define ‘inorder "‘inorder")
+(define ‘postorder "‘postorder")
+(define ‘preorder "‘preorder")
 
+;helper function for work with trees
+(define empty-tree '())
+(define (make-tree root left right) (list root left right))      ; не искаме просто (define make-tree list) - защо?
+(define (make-leaf root) (make-tree root empty-tree empty-tree)) ; за удобство
+(define root-tree car)
+(define left-tree cadr)
+(define right-tree caddr)
+(define empty-tree? null?)
+(define (length lst)
+  (cond
+    [(empty? lst)  0]
+    [(cons? lst)   (+ 1 (length (tail lst)))]))
+
+
+;helper function for tree?
 (define (tree?-helper input final?)
   (define str (string-normalize-spaces input))
   (define (loop i node? left? right? final?)
@@ -47,28 +67,13 @@
                          [else #f]
                          ))]
                 [(eq? cur #\}) (if (and node? left? right?) (if (not final?) (+ i 1) #f) #f)]
-                ;[(eq? cur #\}) (and node? left? right?)]
                 [else #f]
                 ))))
-  ;  (trace loop)
   (if (zero? (string-length str)) #f
       (if (eq? (string-ref str 0) #\{) (loop 1 #f #f #f final?) (if (and (= (string-length str) 1) (eq? (string-ref str 0) #\*)) #t #f))
       ))
-;(trace tree?-helper)
 
-;helper function for work with trees
-(define empty-tree '())
-(define (make-tree root left right) (list root left right))      ; не искаме просто (define make-tree list) - защо?
-(define (make-leaf root) (make-tree root empty-tree empty-tree)) ; за удобство
-(define root-tree car)
-(define left-tree cadr)
-(define right-tree caddr)
-(define empty-tree? null?)
-(define (length lst)
-  (cond
-    [(empty? lst)  0]
-    [(cons? lst)   (+ 1 (length (tail lst)))]))
-
+;helper function for string to tree transformation
 (define (string->tree-helper str)
   (define (loop i node left right lset rset)
     (let ((cur (string-ref str i)))
@@ -91,8 +96,8 @@
 
 ;function for tree hieght
 (define (height tree)
-  (cond [(empty-tree? tree) 0]
-        [(and (empty-tree? (left-tree tree)) (empty-tree? (right-tree tree))) 1]
+  (cond [(empty-tree? tree) -1]
+        [(and (empty-tree? (left-tree tree)) (empty-tree? (right-tree tree))) 0]
         [else 
          (let [(hLeft (+ 1 (height (left-tree tree))))
                (hRight (+ 1 (height (right-tree tree))))]
@@ -139,8 +144,26 @@
                 )]
         ))
 
-(define leftSep "-----")
-(
+
+(define (tree->stream tree order)
+  (cond [(empty-tree? tree) empty-stream]
+        [(and (empty-tree? (left-tree tree)) (empty-tree? (right-tree tree))) (stream (root-tree tree))]
+        [(empty-tree? (left-tree tree))
+         (cond [(or (eq? order ‘inorder) (eq? order ‘preorder)) (stream-append (stream (root-tree tree)) (tree->stream (right-tree tree) order))] ;inorder:LNR;preorder
+               [(eq? order ‘postorder) (stream-append (tree->stream (right-tree tree) order) (stream (root-tree tree)))] ;postorder:LRN
+               [else #f]
+               )]
+        [(empty-tree? (right-tree tree))
+         (cond [(or (eq? order ‘inorder) (eq? order ‘postorder)) (stream-append (tree->stream (left-tree tree) order) (stream (root-tree tree)))] ;inorder:LNR;postorder
+               [(eq? order ‘preorder) (stream-append (stream (root-tree tree)) (tree->stream (left-tree tree) order))] ;preorder:NLR
+               [else #f]
+               )]
+        [(eq? order ‘inorder) (stream-append (tree->stream (left-tree tree) order) (stream (root-tree tree)) (tree->stream (right-tree tree) order))] ;inorder:LNR
+        [(eq? order ‘postorder) (stream-append (tree->stream (left-tree tree) order) (tree->stream (right-tree tree) order) (stream (root-tree tree)))] ;postorder:LRN
+        [(eq? order ‘preorder) (stream-append (stream (root-tree tree)) (tree->stream (left-tree tree) order) (tree->stream (right-tree tree) order))] ;preorder:NLR
+        [else #f]
+        ))
+        
 
 
 (provide (all-defined-out))

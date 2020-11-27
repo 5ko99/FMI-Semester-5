@@ -1,1 +1,1 @@
-("7.9" racket ("4cad34aca716674c3de7ed1a0e75c83e3f1e3626" . "34321760f29d699081a47a998f73c64da545fcbf") (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"racket" #"trace.rkt"))
+("7.9" racket ("f8d03f775564e6602c926730052181295eb5aa2e" . "233351a297fee563acd6228a8588c23a22a1a6d1") (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"racket" #"stream.rkt") (collects #"racket" #"trace.rkt"))
