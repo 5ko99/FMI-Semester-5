@@ -1,0 +1,17 @@
+Повторителите работят на физическо ниво.
+
+Хъб на физическо ниво.
+
+Суичовете работят на канално (второ) ниво. In other words, switch divides collision domain of hosts, but broadcast domain remains same.
+
+ A bridge operates at data link layer.
+
+ Router is mainly a Network Layer device.
+
+-------------------------------------------------------------------------------------------------------------
+ 
+ Collisions are often in a hub environment, because each port on a hub is in the same collision domain. By contrast, each port on a bridge, a switch or a router is in a separate collision domain.
+
+
+
+ All ports on a hub or a switch are by default in the same broadcast domain. All ports on a router are in the different broadcast domains and routers don’t forward broadcasts from one broadcast domain to another.

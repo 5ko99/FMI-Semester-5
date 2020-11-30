@@ -1,0 +1,131 @@
+body,td,th {
+	font-family: Verdana, Geneva, sans-serif;
+	color: #F60;
+	font-size: 16px;
+}
+body{
+	background:url('../img/backtrack_00259177.jpg') no-repeat  fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	background-color: #D6D6D6;
+  	color: #FF6633;
+}
+#divlist{
+	width:1024px;
+	margin-left:auto;
+	margin-right:auto;	
+	margin-bottom:30px;
+	background:url('../img/glass.png')  fixed;
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+#divbnc{
+	float:left;
+}
+.tdcolor{
+	color:#FF9933;
+}
+.tdcolorh{
+	color:#FF6600;
+	font-weight: bold;
+	text-align: center;
+}
+.zag{
+	color: #ff9933;
+	font-weight:bold;
+	text-align:left;
+}
+#imgzag{
+	width=800px;
+	height=200px;
+}
+#zagdiv{
+	text-align:center;
+}
+#zag1{
+	font-size: 24px;
+}
+.abz{
+	margin-left:auto;
+	margin-right:auto;	
+}
+.abzt{
+	text-align: left;
+	color:#FF9933;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+#intsim{
+	width:913px; 
+	height:194px;
+}
+#cctvpic{
+	width:428px; 
+	height:284px;
+	text-align:left;
+}
+#abz1{
+	position:relative;
+	margin-left:520px;
+	text-align: left;
+	color:#FF9933;
+}
+.Layer1{
+	width:1000px;
+	position: relative;
+}
+#coacab{
+	width:500px;
+	height:350px;
+	margin-left:10px;
+}
+#divcoacab{
+	position: absolute;
+}
+#table1{
+	width:75%;
+	text-align: center;
+	margin-left:auto;
+	margin-right:auto;
+}
+#tabdiv{
+	margin-top:90px;
+	position:relative;
+}
+#coacab1{
+	width:428px;
+	height:284px;
+	margin-left:20px;
+}
+#divcoacab1{
+	position:absolute;
+}
+#abz2{
+	position:relative;
+	color:#FF9933;
+	text-align:left;
+	width: 419px;
+	height: 171px;
+	margin-left:440px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+#pozdiv{
+	margin-top:20px;
+}
+.divbnc2{
+	color:#FF3300;
+	font-weight: bold;
+}
+#Layer2{
+	position: relative;
+	margin-left: 840px;
+	margin-top: -350px;
+	padding-bottom:50px;
+}
+#bncdiv{
+	width: 800px;
+}

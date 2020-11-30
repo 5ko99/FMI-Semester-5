@@ -1,0 +1,867 @@
+html {
+	background: url("/theme/image.php/_s/fmi/theme/1363176207/background") gray;
+}
+body {
+	background: url("/theme/image.php/_s/fmi/theme/1363176207/background") gray;
+}
+#page-wrapper {
+	background: rgb(250, 250, 250); margin: 10px 5%; padding: 0.1cm; border: 5px solid silver; min-width: 930px;
+}
+#page {
+	background: rgb(250, 250, 250); padding: 5px; width: auto;
+}
+#page-content {
+	min-width: inherit;
+}
+a:link {
+	color: rgb(24, 68, 242); text-decoration: none;
+}
+a:visited {
+	color: rgb(24, 68, 242); text-decoration: none;
+}
+a:hover {
+	color: rgb(230, 143, 23); text-decoration: underline;
+}
+a:active {
+	color: rgb(230, 143, 23); text-decoration: underline;
+}
+.rolelink {
+	margin: 10px 0px; text-align: right;
+}
+.buttons {
+	text-align: center;
+}
+.mform fieldset {
+	border-color: rgb(229, 229, 229);
+}
+.mform legend {
+	background: rgb(237, 237, 237); padding: 0px 5px; border: 1px solid rgb(229, 229, 229);
+}
+.generalbox {
+	border-color: rgb(229, 229, 229); padding: 5px;
+}
+#page-header {
+	color: black;
+}
+#page-header h1.headermain {
+	margin: 1em; color: black; font-size: 2em; font-weight: normal;
+}
+.pagelayout-frontpage #page-header h1.headermain {
+	font-size: 2.75em;
+}
+.navbar {
+	padding: 5px; border: 1px solid rgb(198, 206, 232); color: rgb(51, 51, 51); font-size: 0.95em; background-color: rgb(235, 238, 247);
+}
+.navbar .sep {
+	color: rgb(153, 153, 153);
+}
+.block {
+	border: currentColor;
+}
+.block .header {
+	border-width: 1px 1px 0px; border-style: solid; border-color: rgb(136, 153, 221); padding: 2px 5px 2px 16px; background-image: url("/theme/image.php/_s/fmi/theme/1363176207/decoration"); background-repeat: repeat-y; background-color: rgb(150, 180, 239);
+}
+.block .header h2 {
+	color: rgb(255, 255, 255); line-height: 1; font-size: 1.2em;
+}
+.block .content {
+	background: rgb(237, 237, 237); padding: 5px 10px; border: 1px solid rgb(136, 153, 221);
+}
+.block_js_expansion .block_tree {
+	overflow: auto;
+}
+.block_recent_activity h2 {
+	margin: 0.5em 0px; font-size: 1em;
+}
+main {
+	margin: 0.5em 0px; font-size: 1em;
+}
+.block_recent_activity h3.main {
+	margin: 0.5em 0px; font-size: 1em;
+}
+.block_calendar_month .content h3.eventskey {
+	margin: 0.25em 0px; font-size: 1em;
+}
+td.eventskey {
+	padding: 0px 5px 3px;
+}
+.minicalendar td {
+	border-color: silver;
+}
+.minicalendar th {
+	border-color: silver;
+}
+.block_comments textarea {
+	width: 95%; margin-bottom: 1em;
+}
+.block_comments .comment-area a {
+	background: rgb(250, 250, 250); padding: 5px; border: 1px solid rgb(229, 229, 229);
+}
+.comment-delete-confirm {
+	background: rgb(250, 250, 250);
+}
+.block_messages .content {
+	font-size: 0.95em;
+}
+.block_messages .footer {
+	text-align: center;
+}
+.calendarlayout .sidecalendar .block {
+	width: 180px;
+}
+.calendarlayout .sidecalendar .block .content {
+	font-size: 0.85em;
+}
+.calendarlayout .minicalendarblock h3 {
+	margin: 1em 0px 0.25em; text-align: center; font-size: 1.2em;
+}
+.calendarlayout .maincalendar .header {
+	margin: 1em 0px 0px; padding: 5px;
+}
+.calendarlayout .maincalendar .eventlist .event {
+	border: currentColor;
+}
+.calendarlayout .maincalendar .eventlist .event .topic {
+	background: rgb(214, 238, 189); padding: 5px 10px; border: 1px solid rgb(160, 194, 120);
+}
+.calendarlayout .maincalendar .eventlist .event .description {
+	border-width: 0px 1px 1px; border-style: solid; border-color: rgb(160, 194, 120); padding: 5px 10px;
+}
+.calendarlayout .maincalendar .eventlist .event .picture {
+	text-align: center;
+}
+.maincalendar .calendar-controls {
+	background: rgb(237, 237, 237); padding: 10px 5px 0px; border-bottom-color: rgb(229, 229, 229); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.maincalendar .calendar-controls .previous {
+	width: 5%; float: left;
+}
+.maincalendar .calendar-controls .current {
+	width: 5%; float: left;
+}
+.maincalendar .calendar-controls .next {
+	width: 5%; float: left;
+}
+.maincalendar .calendar-controls .previous {
+	float: left;
+}
+.maincalendar .calendar-controls h1.current {
+	text-align: center; line-height: 1; font-size: 1.5em;
+}
+.maincalendar .calendar-controls .next {
+	text-align: right;
+}
+.maincalendar .filters table td {
+	font-size: 0.9em;
+}
+.maincalendar .bottom {
+	margin-top: 25px;
+}
+.minicalendar th abbr {
+	border: currentColor;
+}
+.sidecalendar .filters td {
+	padding: 2px; font-size: 0.85em;
+}
+.minicalendar td {
+	padding: 2px; font-size: 0.85em;
+}
+.minicalendar th {
+	padding: 2px; font-size: 0.85em;
+}
+h2.headingblock {
+	font-weight: normal;
+}
+.coursebox {
+	border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.coursebox .info {
+	width: 45%;
+}
+.coursebox .summary {
+	width: 50%;
+}
+.coursebox h3.name {
+	margin: 0px; line-height: 1.4; font-size: 1.2em;
+}
+.coursebox .info .teachers {
+	font-size: 0.95em; margin-left: 0.6em;
+}
+.categorybox {
+	border: currentColor;
+}
+h2.headingblock {
+	font-size: 1.5em; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid;
+}
+#page-course-category .categorypicker {
+	margin: 10px 0px 20px; text-align: center;
+}
+.path-course-view .course-content li.section {
+	border: 1px solid rgb(229, 229, 229);
+}
+.path-course-view .course-content .side {
+	padding: 5px 0px;
+}
+#page-course-view-weeks .weekdates {
+	padding: 2px; color: rgb(119, 119, 119); font-size: 1em; font-weight: normal;
+}
+.course-content .main {
+	background: rgb(237, 239, 248);
+}
+.course-content .current {
+	background: rgb(150, 180, 239);
+}
+.course-content .current .left {
+	color: rgb(255, 255, 255);
+}
+.course-content .main .content {
+	background: rgb(250, 250, 250); padding: 10px;
+}
+.userinfobox {
+	margin: 0px auto; border: currentColor; width: 75%;
+}
+.userinfobox .content {
+	background: rgb(237, 237, 237); padding: 10px; border: 1px solid rgb(218, 223, 213);
+}
+#page-user-view .buttons {
+	margin: 0px auto; width: 250px;
+}
+#page-user-view .buttons div {
+	padding: 10px; float: left;
+}
+#page-user-index .rolesform {
+	margin: 15px; text-align: center;
+}
+#page-user-index .rolesform div {
+	display: inline;
+}
+#page-user-index .rolesform form {
+	display: inline;
+}
+#page-user-index .rolesform div div {
+	display: inline;
+}
+#page-user-index h3.main {
+	margin: 1em 0px;
+}
+#page-user-index #participantsform {
+	text-align: center;
+}
+#page-user-index #participants {
+	margin: 25px auto; width: 85%;
+}
+#page-user-index #participants th a:link {
+	color: rgb(255, 255, 255);
+}
+#page-user-index #participants th a:visited {
+	color: rgb(255, 255, 255);
+}
+#page-user-index .userinfobox .links a {
+	display: block;
+}
+#page-user-action_redir .generaltable {
+	margin: 15px auto 20px; width: 80%;
+}
+#page-user-messageselect .generalbox {
+	border-color: rgb(229, 229, 229); padding: 10px;
+}
+#page-user-action_redir .generalbox {
+	border-color: rgb(229, 229, 229); padding: 10px;
+}
+#page-user-messageselect #theform table {
+	margin: auto;
+}
+#page-user-action_redir #theform table {
+	margin: auto;
+}
+#page-user-messageselect #theform .generalbox table {
+	
+}
+#page-user-action_redir #theform .generalbox table {
+	
+}
+#page-my-index .generalbox {
+	border: currentColor; text-align: center;
+}
+.tabtree ul {
+	text-align: center;
+}
+.tabtree .tabrow0 {
+	margin: 1em 0px; width: 100%;
+}
+.tabtree .tabrow0 li {
+	margin-right: -4px;
+}
+.tabtree .tabrow0 li.here {
+	font-weight: bold;
+}
+.tabtree .tabrow0 li.here a {
+	position: relative; z-index: 102;
+}
+.tabtree .tabrow0 li a {
+	background: rgb(237, 237, 237); border-width: 1px 1px 0px; border-style: solid; border-color: rgb(218, 223, 213); padding: 6px 6px 5px; color: rgb(37, 45, 76); font-weight: bold; margin-right: 3px;
+}
+.tabtree .tabrow0 li.here a {
+	background: rgb(255, 255, 255); border-width: 6px 1px 0px; border-color: rgb(57, 69, 116); cursor: pointer;
+}
+.tabtree .tabrow0 li a:hover {
+	background: rgb(255, 255, 255); border-color: rgb(132, 167, 84);
+}
+.tabtree .tabrow0 ul {
+	background: rgb(255, 255, 255); margin: 1px 0px 0px; padding: 0px; font-weight: normal; border-top-color: rgb(57, 69, 116); border-top-width: 1px; border-top-style: solid;
+}
+.tabtree .tabrow0 div {
+	background: rgb(255, 255, 255); margin: 1px 0px 0px; padding: 0px; font-weight: normal; border-top-color: rgb(57, 69, 116); border-top-width: 1px; border-top-style: solid;
+}
+.tabtree tabrow2 ul {
+	border: currentColor;
+}
+.tabtree .tabrow0 li.here .empty {
+	background: rgb(255, 255, 255); padding: 0px; width: 100%; height: 1px; overflow: hidden; display: block; position: absolute;
+}
+.tabtree .tabrow1 li a {
+	border: currentColor; font-size: 0.95em;
+}
+.tabtree .tabrow1 li a:hover {
+	border: currentColor; font-size: 0.95em;
+}
+.tabtree .tabrow1 li a span {
+	border: currentColor; font-size: 0.95em;
+}
+.tabtree .tabrow1 li a:hover span {
+	border: currentColor; font-size: 0.95em;
+}
+.tabtree a.nolink {
+	color: rgb(136, 136, 136); text-decoration: none;
+}
+.tabtree .here ul a.nolink {
+	color: rgb(136, 136, 136); text-decoration: none;
+}
+.tabtree a.nolink:hover {
+	color: rgb(136, 136, 136); text-decoration: none;
+}
+.tabtree .here ul a.nolink:hover {
+	color: rgb(136, 136, 136); text-decoration: none;
+}
+.tabtree .here a.nolink {
+	color: black; text-decoration: none;
+}
+.tabtree .here ul .here a.nolink {
+	color: black; text-decoration: none;
+}
+.tabtree .here a.nolink:hover {
+	color: black; text-decoration: none;
+}
+.tabtree .here ul .here a.nolink:hover {
+	color: black; text-decoration: none;
+}
+.ie7 .tabtree .tabrow0 li {
+	margin-left: 0px;
+}
+.ie7 .tabtree .tabrow0 li.first {
+	margin-right: -4px;
+}
+.ie7 .tabtree .tabrow0 li.onerow {
+	margin-right: 0px;
+}
+.ie7 .tabtree .tabrow0 a {
+	padding: 8px 0px 0.35em 13px; line-height: 1.5em; display: inline-block;
+}
+.ie7 .tabtree .tabrow0 a span {
+	padding: 10px 1em 10px 0px;
+}
+.ie7 .tabtree .tabrow0 div {
+	padding: 0.2em 0px; top: 2.6em;
+}
+.ie7 .tabtree .tabrow0 div.empty {
+	margin-right: 0px;
+}
+.mod-quiz.ie7 div.tabtree a span img.iconsmall {
+	margin: 0px; top: 2px; vertical-align: baseline; position: relative;
+}
+.ie6 .tabtree {
+	height: 100%;
+}
+.ie6 .tabtree .tabrow0 {
+	padding-top: 10px;
+}
+.ie6 .tabtree .tabrow0 li {
+	margin-left: 0px;
+}
+.ie6 .tabtree .tabrow0 li.first {
+	margin-right: -4px; margin-left: -4px;
+}
+.ie6 .tabtree .tabrow0 li.last a {
+	margin-right: 0px;
+}
+.ie6 .tabtree .tabrow0 li.onerow {
+	margin-right: 0px;
+}
+.ie6 .tabtree .tabrow0 a {
+	padding: 0px 0px 0px 13px;
+}
+.ie6 .tabtree .tabrow0 a span {
+	padding: 12px 1em 4px 0px;
+}
+.ie6 .tabtree .tabrow0 div {
+	padding: 0.2em 0px; top: 3.5em;
+}
+#intro {
+	background: rgb(237, 237, 237); margin: 1em auto; padding: 10px; border: 1px solid rgb(208, 211, 202); width: 75%;
+}
+#notice {
+	border-color: rgb(229, 229, 229); padding: 5px; text-align: center;
+}
+.redirectmessage {
+	border-color: rgb(229, 229, 229); padding: 5px; text-align: center;
+}
+.pagelayout-embedded #page-wrapper {
+	margin: 3% 15%; text-align: center;
+}
+.pagelayout-embedded #content {
+	padding: 10px;
+}
+.notifysuccess {
+	margin: 25px; text-align: center; font-weight: bold;
+}
+.forumpost {
+	border: currentColor;
+}
+.forumpost .topic {
+	background: rgb(178, 187, 223); padding: 5px 10px; border: 1px solid rgb(120, 135, 194);
+}
+.forumpost .starter {
+	background: rgb(249, 179, 82);
+}
+.forumpost .subject {
+	font-size: 1.2em;
+}
+.forumpost .author {
+	color: rgb(85, 85, 85); font-size: 0.95em; font-style: italic;
+}
+.forumpost .author a:link {
+	color: rgb(24, 68, 242); text-decoration: underline;
+}
+.forumpost .author a:visited {
+	color: rgb(24, 68, 242); text-decoration: underline;
+}
+.forumpost .author a:hover {
+	text-decoration: none;
+}
+.forumpost .no-overflow {
+	border: 1px solid rgb(120, 135, 194);
+}
+.forumpost .options {
+	border: 1px solid rgb(120, 135, 194);
+}
+.forumpost .options {
+	padding: 5px 10px;
+}
+.forumpost .content .posting {
+	padding: 5px 10px;
+}
+.forumaddnew {
+	text-align: center; margin-bottom: 15px;
+}
+.forumnodiscuss {
+	text-align: center; margin-bottom: 15px;
+}
+.path-mod-forum .forumheaderlist .picture {
+	padding-top: 10px; padding-right: 0px; border-right-width: 0px;
+}
+.path-mod-forum .forumheaderlist .replies {
+	text-align: center;
+}
+.path-mod-forum .forumheaderlist .replies .read {
+	background: rgb(252, 255, 216); padding: 2px;
+}
+.path-mod-forum .unread .content {
+	background: rgb(237, 237, 237);
+}
+.path-course-view .section .forum .unread {
+	margin-left: 20px;
+}
+.path-course-view .section .forum .unread a:link {
+	background: rgb(252, 255, 216); color: rgb(136, 136, 136); font-size: 0.9em;
+}
+.path-course-view .section .forum .unread a:visited {
+	background: rgb(252, 255, 216); color: rgb(136, 136, 136); font-size: 0.9em;
+}
+#page-mod-forum-search .generalbox {
+	width: 85%;
+}
+#page-mod-forum-search .searchbox {
+	margin: 25px auto;
+}
+#page-mod-forum-search .searchbox .submit {
+	text-align: center; padding-top: 20px;
+}
+.mod_introbox {
+	background: rgb(237, 237, 237); border-color: rgb(238, 238, 238); margin: 0px auto 15px; width: 75%;
+}
+.path-mod-page .generalbox {
+	margin: 10px auto; padding: 0px 25px; border: currentColor;
+}
+.path-mod-page .modified {
+	text-align: center; color: rgb(119, 119, 119); font-size: 0.8em;
+}
+#page-mod-folder-view .foldertree {
+	margin: 20px auto; padding: 15px; border: 1px solid rgb(229, 229, 229); width: 50%;
+}
+#page-mod-folder-view .foldertree ul {
+	margin-bottom: 0px;
+}
+#page-mod-assignment-view .reportlink a {
+	background: rgb(252, 255, 216);
+}
+#page-mod-assignment-view .generalbox {
+	border-color: rgb(229, 229, 229); padding: 10px; width: 75%;
+}
+#page-mod-assignment-view #dates {
+	margin: 20px auto 25px; width: 45%;
+}
+#page-mod-assignment-view #dates table {
+	margin: 0px auto;
+}
+#page-mod-assignment-view fieldset .fitem {
+	margin: 0px auto; width: 50%;
+}
+#page-mod-assignment-view fieldset .fitem .fitemtitle {
+	width: 30%;
+}
+#page-mod-assignment-view fieldset .fitem .ffile {
+	margin-left: 32%;
+}
+#page-mod-assignment-view .mform fieldset {
+	margin-bottom: 0px;
+}
+#page-mod-assignment-view .mform .fitem .fsubmit {
+	margin: 0px; width: 100%; text-align: center;
+}
+#page-mod-assignment-view .singlebutton {
+	margin: 15px;
+}
+#page-mod-assignment-view #online {
+	margin: 10px auto; width: 90%;
+}
+#page-mod-assignment-view #online fieldset .fitem {
+	width: 100%;
+}
+#page-mod-assignment-view #online fieldset .fitem .fitemtitle {
+	width: 15%;
+}
+#page-mod-choice-view #notice {
+	margin: 0px auto; padding: 15px; border: currentColor; width: 55%;
+}
+#page-mod-choice-view h2.main {
+	margin: 1em 0px; font-size: 1.5em;
+}
+.path-mod-choice .results td {
+	padding: 5px;
+}
+.path-mod-choice .results .count {
+	border-top-color: rgb(150, 180, 239); border-top-width: 1px; border-top-style: solid;
+}
+.path-mod-feedback h4.main {
+	margin-top: 1em;
+}
+.path-mod-feedback .continuebutton {
+	margin: 1em 0px; text-align: center;
+}
+#page-mod-feedback-show_entries .generalbox {
+	width: 60%;
+}
+#page-mod-feedback-show_entries table {
+	margin: 0px auto;
+}
+#page-mod-feedback-analysis table {
+	margin: 0px auto;
+}
+#page-mod-feedback-analysis .form-buttons {
+	padding-right: 5px; float: right;
+}
+#page-mod-glossary-view .glossarycontrol {
+	float: none;
+}
+#page-mod-glossary-view .singlebutton {
+	text-align: center;
+}
+#page-mod-glossary-view form .boxaligncenter td {
+	text-align: center;
+}
+#page-mod-glossary-view .entrybox {
+	text-align: center;
+}
+.path-mod-glossary .entrybox .glossarycategoryheader {
+	width: 100%;
+}
+.path-mod-glossary .entrybox .glossarycategoryheader th {
+	background: rgb(237, 237, 237); border-bottom-color: rgb(229, 229, 229); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.path-mod-glossary .entrybox .glossarycategoryheader th h2.main {
+	margin: 0px; line-height: 1.5; font-size: 1.2em;
+}
+.path-mod-glossary .entrybox .entry .concept h3 {
+	line-height: 1.5; font-size: 1.2em; margin-bottom: 0px; display: inline;
+}
+.path-mod-glossary .entrybox .fullwithauthor .concept h3 {
+	margin-bottom: 0.2em;
+}
+.path-mod-glossary .entrybox .encyclopedia .concept h3 {
+	margin-bottom: 0.2em;
+}
+.path-mod-glossary .entrybox .glossarypost {
+	border-bottom-color: rgb(229, 229, 229); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.path-mod-glossary .entrybox .entryheader {
+	font-weight: normal;
+}
+.path-mod-glossary .entrybox .entrylist {
+	width: 100%;
+}
+.path-mod-glossary .entrybox .entrylist .entrylowersection {
+	text-align: right;
+}
+#page-mod-glossary-editcategories .generalbox {
+	margin: 10px auto; width: 50%;
+}
+#page-mod-glossary-editcategories .generalbox th {
+	border: currentColor;
+}
+#page-mod-glossary-editcategories .generalbox .buttons {
+	padding: 15px;
+}
+#page-mod-glossary-editcategories .generalbox table .action {
+	text-align: center; border-left-color: rgb(238, 238, 238); border-left-width: 1px; border-left-style: solid;
+}
+#page-mod-glossary-editcategories .generalbox .confirmbuttons {
+	margin: 0px auto;
+}
+#page-mod-glossary-editcategories .generalbox .editbuttons {
+	margin: 0px auto;
+}
+.deletecatconfirm {
+	text-align: center;
+}
+.mform .fitem fieldset.felement {
+	margin: 0px auto 1em; text-align: center; padding-top: 0px; padding-left: 25px;
+}
+.path-backup .mform .fitem fieldset.felement {
+	padding-left: 0px; margin-left: 0px;
+}
+#page-mod-glossary-editcategories .generalbox {
+	border: 1px solid rgb(208, 211, 202);
+}
+#page-user-action_redir .generaltable {
+	border: 1px solid rgb(208, 211, 202);
+}
+#page-user-index #participants {
+	border: 1px solid rgb(208, 211, 202);
+}
+.path-mod-forum .forumheaderlist {
+	border: 1px solid rgb(208, 211, 202);
+}
+#page-mod-glossary-editcategories .generalbox th {
+	border-width: 0px 0px 2px; border-style: solid; border-color: orange; color: rgb(255, 255, 255); padding-left: 5px; background-color: rgb(80, 112, 187);
+}
+#page-user-action_redir .generaltable th {
+	border-width: 0px 0px 2px; border-style: solid; border-color: orange; color: rgb(255, 255, 255); padding-left: 5px; background-color: rgb(80, 112, 187);
+}
+#page-user-index #participants th {
+	border-width: 0px 0px 2px; border-style: solid; border-color: orange; color: rgb(255, 255, 255); padding-left: 5px; background-color: rgb(80, 112, 187);
+}
+.path-mod-choice .results th {
+	border-width: 0px 0px 2px; border-style: solid; border-color: orange; color: rgb(255, 255, 255); padding-left: 5px; background-color: rgb(80, 112, 187);
+}
+.path-mod-forum .forumheaderlist th {
+	border-width: 0px 0px 2px; border-style: solid; border-color: orange; color: rgb(255, 255, 255); padding-left: 5px; background-color: rgb(80, 112, 187);
+}
+#page-user-action_redir .generaltable td {
+	border-width: 0px 1px 1px 0px; border-style: solid; border-color: rgb(208, 211, 202); padding: 2px 8px; border-collapse: collapse;
+}
+#page-user-index #participants td {
+	border-width: 0px 1px 1px 0px; border-style: solid; border-color: rgb(208, 211, 202); padding: 2px 8px; border-collapse: collapse;
+}
+.path-mod-forum .forumheaderlist td {
+	border-width: 0px 1px 1px 0px; border-style: solid; border-color: rgb(208, 211, 202); padding: 2px 8px; border-collapse: collapse;
+}
+#page-user-action_redir .generaltable .r1 td {
+	background: rgb(237, 237, 237);
+}
+#page-user-index #participants .r0 td {
+	background: rgb(237, 237, 237);
+}
+.path-mod-choice .results .count {
+	background: rgb(237, 237, 237);
+}
+.path-mod-forum .forumheaderlist .r1 td {
+	background: rgb(237, 237, 237);
+}
+#page-footer {
+	color: black;
+}
+#page-footer a {
+	color: rgb(157, 165, 199);
+}
+#page-footer a:hover {
+	color: rgb(157, 165, 199);
+}
+#page-footer .logininfo {
+	margin: 0px; padding: 5px; float: left;
+}
+#page-footer .helplink {
+	margin: 0px; padding: 5px; float: right;
+}
+#page-footer-bottom {
+	margin: 10px 20%; text-align: center;
+}
+.performanceinfo span {
+	display: block;
+}
+.validators {
+	padding-top: 5px; margin-top: 40px; border-top-color: gray; border-top-width: 1px; border-top-style: dotted;
+}
+.validators ul {
+	margin: 0px; padding: 0px; list-style-type: none;
+}
+.validators ul li {
+	margin-right: 10px; margin-left: 10px; display: inline;
+}
+.myclear {
+	clear: both;
+}
+#custommenu .yui3-menu-horizontal .yui3-menu-content {
+	border-width: 0px;
+}
+#custommenu .javascript-disabled.yui3-menu-horizontal .yui3-menu-content {
+	border-width: 0px;
+}
+#custommenu .yui3-menu-horizontal .yui3-menu-content ul {
+	border-width: 0px;
+}
+#custommenu .javascript-disabled.yui3-menu-horizontal .yui3-menu-content ul {
+	border-width: 0px;
+}
+#custommenu .javascript-disabled.yui3-menu-horizontal .yui3-menu-content li li:hover > a {
+	border-width: 0px;
+}
+#custommenu .yui3-menu-horizontal .yui3-menu-label {
+	border-width: 0px;
+}
+.yui3-skin-sam .yui3-menu-horizontal .yui3-menuitem-content {
+	border-width: 0px;
+}
+#custommenu .yui3-menu-horizontal .yui3-menu-content ul ul {
+	background-color: rgb(37, 45, 76);
+}
+#custommenu .javascript-disabled.yui3-menu-horizontal .yui3-menu-content ul ul {
+	background-color: rgb(37, 45, 76);
+}
+#custommenu .javascript-disabled.yui3-menu-horizontal .yui3-menu-content li li:hover {
+	background-color: rgb(50, 60, 102);
+}
+#custommenu .javascript-disabled.yui3-menu-horizontal .yui3-menu-content li li:hover a {
+	background-color: rgb(50, 60, 102);
+}
+.yui3-skin-sam #custommenu .yui3-menu .yui3-menuitem-active.yui3-menuitem .yui3-menuitem-content {
+	background-color: rgb(50, 60, 102);
+}
+.yui3-skin-sam .yui3-menu-label-active {
+	background-color: rgb(50, 60, 102);
+}
+.yui3-skin-sam .yui3-menu-label-menuvisible {
+	background-color: rgb(50, 60, 102);
+}
+.yui3-skin-sam .yui3-menu .yui3-menu .yui3-menu-label-active {
+	background-color: rgb(50, 60, 102);
+}
+.yui3-skin-sam .yui3-menu .yui3-menu .yui3-menu-label-menuvisible {
+	background-color: rgb(50, 60, 102);
+}
+#custommenu .yui3-menu-horizontal .yui3-menu-content li a {
+	cursor: pointer;
+}
+.yui3-skin-sam #custommenu .yui3-menu-content {
+	padding: 0px;
+}
+.yui3-skin-sam #custommenu .yui3-menu .yui3-menu .yui3-menu-content {
+	padding: 0px;
+}
+.site-logo {
+	margin: 0.3cm; padding: 0px; clear: none; float: left;
+}
+.fmi-floatright {
+	clear: none; float: right;
+}
+.headermenu {
+	margin: 0px; padding: 0px; clear: right; float: right;
+}
+.headermain {
+	margin: 0px; padding: 0px; clear: right; float: right;
+}
+.breadcrumb {
+	vertical-align: bottom; display: inline;
+}
+.minicalendar {
+	border-collapse: collapse;
+}
+.block-hider-hide {
+	background-color: white;
+}
+.homelink a {
+	background-position: left; padding: 3px 5px 3px 25px; border: 1px solid black; background-image: url("/theme/image.php/_s/fmi/theme/1363176207/house"); background-repeat: no-repeat; background-color: rgb(215, 215, 215);
+}
+.homelink a:visited {
+	background-position: left; padding: 3px 5px 3px 25px; border: 1px solid black; background-image: url("/theme/image.php/_s/fmi/theme/1363176207/house"); background-repeat: no-repeat; background-color: rgb(215, 215, 215);
+}
+.homelink a:hover {
+	border: 1px solid gray; background-color: rgb(237, 237, 237);
+}
+.forumpost .topic {
+	border-width: 1px 1px 0px;
+}
+.forumpost .options {
+	border-width: 0px 1px 1px; background-color: rgb(237, 237, 237);
+}
+.forumpost .content .posting {
+	border-width: 0px 1px; padding: 2ex;
+}
+input[type='text'] {
+	padding: 2px; border: 1px solid rgb(150, 180, 239);
+}
+input[type='password'] {
+	padding: 2px; border: 1px solid rgb(150, 180, 239);
+}
+select {
+	padding: 2px; border: 1px solid rgb(150, 180, 239);
+}
+textarea {
+	padding: 2px; border: 1px solid rgb(150, 180, 239);
+}
+input[type='text']:focus {
+	padding: 2px; border: 1px solid orange; background-color: rgb(240, 240, 240);
+}
+input[type='password']:focus {
+	padding: 2px; border: 1px solid orange; background-color: rgb(240, 240, 240);
+}
+select:focus {
+	padding: 2px; border: 1px solid orange; background-color: rgb(240, 240, 240);
+}
+textarea:focus {
+	padding: 2px; border: 1px solid orange; background-color: rgb(240, 240, 240);
+}
+input[type='submit'] {
+	margin: 0.05cm; padding: 0.07cm 0.2cm;
+}
+button {
+	margin: 0.05cm; padding: 0.07cm 0.2cm;
+}
+.modtype_label h2 {
+	margin-top: 0.5em; margin-bottom: 0.2em;
+}
+.modtype_label h3 {
+	margin-top: 0.5em; margin-bottom: 0.2em;
+}
+.modtype_label h4 {
+	margin-top: 0.5em; margin-bottom: 0.2em;
+}

@@ -130,9 +130,9 @@
 (define (ordered? tree)
   (cond [(empty-tree? tree) #t]
         [(and (empty-tree? (left-tree tree)) (empty-tree? (right-tree tree))) #t]
-        [(empty-tree? (left-tree tree)) (if (<= (root-tree tree) (root-tree (right-tree tree))) #t #f)]
-        [(empty-tree? (right-tree tree)) (if (>= (root-tree tree) (root-tree (left-tree tree))) #t #f)]
-        [else (and (>= (root-tree tree) (root-tree (left-tree tree))) (<= (root-tree tree) (root-tree (right-tree tree))) (ordered? (left-tree tree)) (ordered? (right-tree tree)))]
+        [(empty-tree? (left-tree tree)) (if (< (root-tree tree) (root-tree (right-tree tree))) (ordered? (right-tree tree)) #f)]
+        [(empty-tree? (right-tree tree)) (if (>= (root-tree tree) (root-tree (left-tree tree))) (ordered? (left-tree tree)) #f)]
+        [else (and (>= (root-tree tree) (root-tree (left-tree tree))) (< (root-tree tree) (root-tree (right-tree tree))) (ordered? (left-tree tree)) (ordered? (right-tree tree)))]
         ))
 
 (define (tree->string tree)

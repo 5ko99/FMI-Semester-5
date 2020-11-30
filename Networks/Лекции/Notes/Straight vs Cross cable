@@ -1,0 +1,14 @@
+Use a straight-through cable when:
+
+1. Connecting a router to a hub
+2. Connecting a computer to a swtich
+3. Connecting a LAN port to a switch, hub, or computer
+
+
+Use a crossover cable when:
+
+1. Connecting a computer to a router
+2. Connecting a computer to a computer
+3. Connecting a router to a router
+4. Connecting a switch to a switch
+5. Connecting a hub to a hub
