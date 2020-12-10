@@ -149,12 +149,12 @@
   (cond [(empty-tree? tree) empty-stream]
         [(and (empty-tree? (left-tree tree)) (empty-tree? (right-tree tree))) (stream (root-tree tree))]
         [(empty-tree? (left-tree tree))
-         (cond [(or (eq? order ‘inorder) (eq? order ‘preorder)) (stream-append (stream (root-tree tree)) (tree->stream (right-tree tree) order))] ;inorder:LNR;preorder
+         (cond [(or (eq? order ‘inorder) (eq? order ‘preorder)) (stream-append (stream (root-tree tree)) (tree->stream (right-tree tree) order))] ;inorder:LNR;preorder:NLR;
                [(eq? order ‘postorder) (stream-append (tree->stream (right-tree tree) order) (stream (root-tree tree)))] ;postorder:LRN
                [else #f]
                )]
         [(empty-tree? (right-tree tree))
-         (cond [(or (eq? order ‘inorder) (eq? order ‘postorder)) (stream-append (tree->stream (left-tree tree) order) (stream (root-tree tree)))] ;inorder:LNR;postorder
+         (cond [(or (eq? order ‘inorder) (eq? order ‘postorder)) (stream-append (tree->stream (left-tree tree) order) (stream (root-tree tree)))] ;inorder:LNR;postorder:LRN
                [(eq? order ‘preorder) (stream-append (stream (root-tree tree)) (tree->stream (left-tree tree) order))] ;preorder:NLR
                [else #f]
                )]
@@ -163,8 +163,6 @@
         [(eq? order ‘preorder) (stream-append (stream (root-tree tree)) (tree->stream (left-tree tree) order) (tree->stream (right-tree tree) order))] ;preorder:NLR
         [else #f]
         ))
-        
 
-
-(provide (all-defined-out))
-  
+(provide tree? string->tree tree->string height balanced? ordered? tree->stream ‘inorder ‘postorder ‘preorder)
+;(provide (all-defined-out))
