@@ -80,13 +80,44 @@ notNull (Parser p) = Parser $ \input -> do
 
 -- Note: No escape support
 stringLiteral :: Parser String
-stringLiteral = spanP (/= '"')
+stringLiteral = charP '"' *> spanP (/= '"') <* charP '"'
 
 jsonString :: Parser JsonValue
-jsonString = JsonString <$> (charP '"' *> stringLiteral <* charP '"')
+jsonString = JsonString <$> stringLiteral
+
+ws :: Parser String
+ws = spanP isSpace
+
+sepBy :: Parser a -> Parser b -> Parser [b]
+sepBy sep element = (:) <$> element <*> many (sep *> element) <|> pure []
+
+jsonArray :: Parser JsonValue
+jsonArray = JsonArray <$> (charP '[' *> ws *> elements <* ws <* charP ']')
+  where
+    elements = sepBy (ws *> charP ',' <* ws) jsonValue
+
+jsonObject :: Parser JsonValue
+jsonObject =
+  JsonObject
+    <$> ( charP '{'
+            *> ws
+            *> sepBy (ws *> charP ',' <* ws) pair
+            <* ws
+            <* charP '}'
+        )
+  where
+    pair =
+      (\key _ value -> (key, value)) <$> stringLiteral
+        <*> (ws *> charP ':' <* ws)
+        <*> jsonValue
 
 jsonValue :: Parser JsonValue
-jsonValue = jsonNull <|> jsonBool <|> jsonNumber <|> jsonString
+jsonValue = jsonNull <|> jsonBool <|> jsonNumber <|> jsonString <|> jsonArray <|> jsonObject
+
+parseFile :: FilePath -> Parser a -> IO (Maybe a)
+parseFile fileName parser = do
+  input <- readFile fileName
+  return (snd <$> runParser parser input)
 
 main :: IO ()
 main = undefined
