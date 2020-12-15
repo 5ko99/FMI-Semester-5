@@ -2,8 +2,8 @@
 
 module Main where
 
-import Control.Applicative
-import Data.Char
+import Control.Applicative ( Alternative((<|>), empty, many) )
+import Data.Char ( isDigit, isSpace )
 
 data JsonValue
   = JsonNull
