@@ -2,8 +2,8 @@
 
 module Main where
 
-import Control.Applicative ( Alternative((<|>), empty, many) )
-import Data.Char ( isDigit, isSpace )
+import Control.Applicative (Alternative (empty, many, (<|>)))
+import Data.Char (isDigit, isSpace)
 
 data JsonValue
   = JsonNull
@@ -38,7 +38,7 @@ instance Alternative Parser where
     p1 input <|> p2 input
 
 jsonNull :: Parser JsonValue
-jsonNull = (\_ -> JsonNull) <$> stringP "null"
+jsonNull = (\_ -> JsonNull) <$> stringP "null" --fmap
 
 charP :: Char -> Parser Char
 charP x = Parser f
