@@ -107,7 +107,8 @@ jsonObject =
         )
   where
     pair =
-      (\key _ value -> (key, value)) <$> stringLiteral
+      (\key _ value -> (key, value))
+        <$> stringLiteral
         <*> (ws *> charP ':' <* ws)
         <*> jsonValue
 
