@@ -6,7 +6,7 @@ module ParserUtils where
 
 import Control.Applicative (Alternative (empty, many, (<|>)))
 import Data.Bifunctor (Bifunctor (second))
-import Data.Char (isAlphaNum, isDigit, isSpace, ord)
+import Data.Char (isAlphaNum, isDigit, isLetter, isSpace, ord)
 import Prelude hiding (span)
 import qualified Prelude
 
@@ -87,8 +87,27 @@ alphaNum = span isAlphaNum
 stringLiteral :: Parser String
 stringLiteral = char '"' *> span (/= '"') <* char '"'
 
+--My code
 tag :: Parser String
 tag = span (/= '=')
+
+closingName :: Parser String
+closingName = span (/= '>')
+
+--useful function
+noEndOrArrow c = if ((c /= ' ') && (c /= '>')) then True else False
+
+onlyLetters :: Parser String
+onlyLetters = do
+  list <- reads <$> span isLetter
+  case list of
+    [(string, _)] -> return string
+    _ -> abortParser "could not parse string"
+
+text :: Parser String
+text = span noEndOrArrow
+
+--end of my code
 
 natural :: Parser Integer
 natural = do

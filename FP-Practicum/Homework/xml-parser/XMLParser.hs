@@ -23,32 +23,41 @@ data XMLObject
 
 attributeParser :: Parser Attribute
 attributeParser =
-  (\_ name _ param -> (name, param))
-    <$> ws
-    <*> tag
+  (\name _ param -> (name, param))
+    <$> tag
     <*> char '='
     <*> stringLiteral
 
+closingTagParser :: Parser String
+closingTagParser =
+  (\_ _ tagName _ -> "</" ++ tagName ++ ">")
+    <$> char '<'
+    <*> char '/'
+    <*> closingName
+    <*> char '>'
 
--- xmlParser :: Parser XMLObject
--- xmlParser =
---   XMLObject
---     <$> ( char '<'
---             <*> stringLiteral name
---             <*> someWS
---             <*> sepBy (ws *> char ' ' <* ws) pair
---             <*> char '>'
---             <*> someWS
---             <*> parserA
---             <* someWS
---             <*> char '<'
---             <*> char '/'
---             *> stringLiteral
---             <* char '>'
---         )
---   where
---     pair =
---       (\key _ value -> (key, value))
---         <$> stringLiteral
---         <*> char '='
---         <*> stringLiteral
+tagParser :: Parser XMLObject
+tagParser =
+  (\_ _ name _ attributes _ _ children _ _ _ -> Element $ TagElement name attributes children)
+    <$> ws
+    <*> char '<'
+    <*> text
+    <*> ws
+    <*> many attributeParser
+    <*> ws
+    <*> char '>'
+    <*> some xmlParser
+    <*> ws
+    <*> closingTagParser
+    <*> ws
+
+--to Change
+textParser :: Parser XMLObject
+textParser =
+  (\text -> Text text)
+    <$> string "ad"
+
+xmlParser :: Parser XMLObject
+xmlParser = textParser <|> tagParser
+
+--xmlParser = textParser <|> tagParser

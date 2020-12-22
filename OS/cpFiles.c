@@ -8,8 +8,12 @@ int main(int argc, char* argv[]){
     scanf("%s %s",&file1,&file2);
     int fd_from = open(file1, O_RDONLY);
     int fd_to = open(file2, O_WRONLY | O_CREAT | O_TRUNC,0664);
+    if(fd_from==-1||fd_to==-1) {
+        perror("Error with file opening!");
+        return -1;
+    }
     char buf[1];
-    while(read(fd_from,buf,1)!=0){
+    while(read(fd_from,buf,1)>0){
         write(fd_to,buf,1);
     }
     close(fd_from);
