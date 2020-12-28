@@ -23,22 +23,50 @@ data XMLObject
 
 attributeParser :: Parser Attribute
 attributeParser =
-  (\name _ param -> (name, param))
-    <$> tag
+  (\_ name _ param _ -> (name, param))
+    <$> ws
+    <*> tag
     <*> char '='
     <*> stringLiteral
+    <*> ws
 
 closingTagParser :: Parser String
 closingTagParser =
-  (\_ _ tagName _ -> "</" ++ tagName ++ ">")
-    <$> char '<'
+  (\_ _ _ tagName _ _ -> "</" ++ tagName ++ ">")
+    <$> ws
+    <*> char '<'
     <*> char '/'
     <*> closingName
     <*> char '>'
+    <*> ws
 
 tagParser :: Parser XMLObject
 tagParser =
-  (\_ _ name _ attributes _ _ children _ _ _ -> Element $ TagElement name attributes children)
+  (\_ _ _ name _ attributes _ _ _ children _ _ _ -> Element $ TagElement name attributes children)
+    <$> ws
+    <*> char '<'
+    <*> ws
+    <*> text
+    <*> ws
+    <*> many attributeParser
+    <*> ws
+    <*> char '>'
+    <*> ws
+    <*> some xmlParser
+    <*> ws
+    <*> closingTagParser
+    <*> ws
+
+textParser :: Parser XMLObject
+textParser =
+  (\_ text _ -> Text text)
+    <$> ws
+    <*> noArrow
+    <*> ws
+
+emptyTagParser :: Parser XMLObject
+emptyTagParser =
+  (\_ _ name _ attributes _ _ _ _ _ -> Element $ TagElement name attributes [])
     <$> ws
     <*> char '<'
     <*> text
@@ -46,18 +74,13 @@ tagParser =
     <*> many attributeParser
     <*> ws
     <*> char '>'
-    <*> some xmlParser
-    <*> ws
+    <*> string "a"
     <*> closingTagParser
     <*> ws
 
---to Change
-textParser :: Parser XMLObject
-textParser =
-  (\text -> Text text)
-    <$> string "ad"
-
 xmlParser :: Parser XMLObject
-xmlParser = textParser <|> tagParser
+xmlParser = tagParser <|> textParser
 
---xmlParser = textParser <|> tagParser
+test = do
+  actualContent <- readFile $ "test-files/" ++ "c" ++ ".xml"
+  return $ runParser xmlParser actualContent

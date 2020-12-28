@@ -25,7 +25,7 @@ assertXMLFileParse fileName = TestCase $ do
 tests :: Test
 tests =
   TestList $
-    map assertXMLFileParse ["a", "b", "c", "d"]
+    map assertXMLFileParse ["a", "b", "c"]
 
 main :: IO Counts
 main = runTestTT tests

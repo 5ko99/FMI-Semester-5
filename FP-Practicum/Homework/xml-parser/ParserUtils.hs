@@ -88,24 +88,24 @@ stringLiteral :: Parser String
 stringLiteral = char '"' *> span (/= '"') <* char '"'
 
 --My code
+tagHelper c = if c /= '=' && c /= '<' && c /= '>' then True else False
+
 tag :: Parser String
-tag = span (/= '=')
+tag = span tagHelper
 
 closingName :: Parser String
 closingName = span (/= '>')
 
---useful function
 noEndOrArrow c = if ((c /= ' ') && (c /= '>')) then True else False
-
-onlyLetters :: Parser String
-onlyLetters = do
-  list <- reads <$> span isLetter
-  case list of
-    [(string, _)] -> return string
-    _ -> abortParser "could not parse string"
 
 text :: Parser String
 text = span noEndOrArrow
+
+noArrow :: Parser String
+noArrow =
+  (:)
+    <$> cond (/= '<')
+    <*> span (/= '<')
 
 --end of my code
 
@@ -115,6 +115,8 @@ natural = do
   case list of
     [(number, _)] -> return number
     _ -> abortParser "could not parse number"
+
+newLineOrSpace c = if isSpace c || (c == '\n') then True else False
 
 ws :: Parser String
 ws = span isSpace
