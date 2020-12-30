@@ -30,32 +30,26 @@ attributeParser =
     <*> stringLiteral
     <*> ws
 
-closingTagParser :: Parser String
-closingTagParser =
-  (\_ _ _ tagName _ _ -> "</" ++ tagName ++ ">")
-    <$> ws
-    <*> char '<'
-    <*> char '/'
-    <*> closingName
-    <*> char '>'
-    <*> ws
+closingTagParser :: String -> Parser String
+closingTagParser name = do
+  ws
+  string "</"
+  closingName <- closingName
+  char '>'
+  ws
+  if closingName == name
+    then return name
+    else abortParser "String"
+
 
 tagParser :: Parser XMLObject
-tagParser =
-  (\_ _ _ name _ attributes _ _ _ children _ _ _ -> Element $ TagElement name attributes children)
-    <$> ws
-    <*> char '<'
-    <*> ws
-    <*> text
-    <*> ws
-    <*> many attributeParser
-    <*> ws
-    <*> char '>'
-    <*> ws
-    <*> some xmlParser
-    <*> ws
-    <*> closingTagParser
-    <*> ws
+tagParser = do
+  name <- ws *> char '<' *> ws *> text <* ws
+  attributes <- many attributeParser
+  ws <* char '>' <* ws
+  children <- many xmlParser
+  ws *> closingTagParser name <* ws
+  return $ Element $ TagElement name attributes children
 
 textParser :: Parser XMLObject
 textParser =
@@ -64,23 +58,9 @@ textParser =
     <*> noArrow
     <*> ws
 
-emptyTagParser :: Parser XMLObject
-emptyTagParser =
-  (\_ _ name _ attributes _ _ _ _ _ -> Element $ TagElement name attributes [])
-    <$> ws
-    <*> char '<'
-    <*> text
-    <*> ws
-    <*> many attributeParser
-    <*> ws
-    <*> char '>'
-    <*> string "a"
-    <*> closingTagParser
-    <*> ws
-
 xmlParser :: Parser XMLObject
 xmlParser = tagParser <|> textParser
 
 test = do
-  actualContent <- readFile $ "test-files/" ++ "c" ++ ".xml"
+  actualContent <- readFile "test-files/e.xml"
   return $ runParser xmlParser actualContent

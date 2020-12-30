@@ -1,7 +1,7 @@
 <body onlod="alabal()" src="test/">
   <p style="background: red">test</p>
-  <p>a</p>
-  <textarea>a</textarea>
+  <p></p>
+  <textarea></textarea>
   <div>
     <p>test</p>
   </div>

@@ -96,7 +96,7 @@ tag = span tagHelper
 closingName :: Parser String
 closingName = span (/= '>')
 
-noEndOrArrow c = if ((c /= ' ') && (c /= '>')) then True else False
+noEndOrArrow c = if ((c /= ' ') && (c /= '>') && (c /= '<') && (c /= '/')) then True else False
 
 text :: Parser String
 text = span noEndOrArrow
