@@ -41,7 +41,6 @@ closingTagParser name = do
     then return name
     else abortParser "String"
 
-
 tagParser :: Parser XMLObject
 tagParser = do
   name <- ws *> char '<' *> ws *> text <* ws
@@ -53,14 +52,14 @@ tagParser = do
 
 textParser :: Parser XMLObject
 textParser =
-  (\_ text _ -> Text text)
-    <$> ws
-    <*> noArrow
-    <*> ws
+  Text
+    <$> (ws *> noArrow <* ws)
 
 xmlParser :: Parser XMLObject
 xmlParser = tagParser <|> textParser
 
+test :: IO XMLObject
 test = do
   actualContent <- readFile "test-files/e.xml"
-  return $ runParser xmlParser actualContent
+  let (Right res) = snd <$> runParser xmlParser actualContent
+    in return res

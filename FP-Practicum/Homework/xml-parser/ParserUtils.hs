@@ -88,7 +88,7 @@ stringLiteral :: Parser String
 stringLiteral = char '"' *> span (/= '"') <* char '"'
 
 --My code
-tagHelper c = if c /= '=' && c /= '<' && c /= '>' then True else False
+tagHelper c = (c /= '=') && (c /= '<') && (c /= '>')
 
 tag :: Parser String
 tag = span tagHelper
@@ -96,7 +96,7 @@ tag = span tagHelper
 closingName :: Parser String
 closingName = span (/= '>')
 
-noEndOrArrow c = if ((c /= ' ') && (c /= '>') && (c /= '<') && (c /= '/')) then True else False
+noEndOrArrow c = (c /= ' ') && (c /= '>') && (c /= '<') && (c /= '/')
 
 text :: Parser String
 text = span noEndOrArrow
