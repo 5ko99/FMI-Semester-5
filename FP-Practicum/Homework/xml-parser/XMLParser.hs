@@ -60,6 +60,6 @@ xmlParser = tagParser <|> textParser
 
 test :: IO XMLObject
 test = do
-  actualContent <- readFile "test-files/e.xml"
+  actualContent <- readFile "test-files/c.xml"
   let (Right res) = snd <$> runParser xmlParser actualContent
-    in return res
+   in return res
