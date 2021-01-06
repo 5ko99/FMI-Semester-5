@@ -1,8 +1,7 @@
-module SaveAndLoad where
+module SaveAndLoad (saveImage, loadImage) where
 
 import Data.List.Split (splitOn)
-import Data.Maybe
-import Definitions
+import Definitions ( Image(..), Rgb(..) )
 
 saveImage :: FilePath -> Image -> IO ()
 saveImage filePath (Image w h c) =
@@ -15,6 +14,12 @@ rgbToString rgb = helper (concat rgb)
   where
     helper [] = []
     helper ((Rgb r g b) : t) = (show r ++ " " ++ show g ++ " " ++ show b ++ "\n") ++ helper t
+
+rgbToString1 :: [[Rgb]] -> String
+rgbToString1 rgb = helper (concat rgb) ""
+  where
+    helper [] res = res
+    helper ((Rgb r g b) : t) res = helper t res ++ (show r ++ " " ++ show g ++ " " ++ show b ++ "\n")
 
 --Load logic
 

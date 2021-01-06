@@ -7,11 +7,11 @@ data Rgb = Rgb
     green :: Word8,
     blue :: Word8
   }
-  deriving (Show, Read)
+  deriving (Show, Read, Eq)
 
 data Image = Image
   { width :: Int,
     height :: Int,
     content :: [[Rgb]]
   }
-  deriving (Show, Read)
+  deriving (Show, Read, Eq)

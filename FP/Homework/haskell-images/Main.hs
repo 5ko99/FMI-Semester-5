@@ -1,8 +1,9 @@
 import Data.Word (Word8)
-import Definitions
-import EdgeDetect
-import Grayscale
-import SaveAndLoad
+import Definitions (Image (Image), Rgb (Rgb))
+import EdgeDetect (edgeDetect)
+import FloodFill (floodFill)
+import Grayscale (grayscale)
+import SaveAndLoad (loadImage, saveImage)
 
 testIMG =
   Image

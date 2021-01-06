@@ -1,4 +1,4 @@
-module Grayscale where
+module Grayscale (updateMatrix, grayscale) where
 
 import Definitions (Image (..), Rgb (..))
 
