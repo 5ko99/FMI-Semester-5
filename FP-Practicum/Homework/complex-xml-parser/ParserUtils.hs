@@ -87,7 +87,11 @@ instance Alternative Parser where
 tryRead :: Read a => String -> Parser a
 tryRead string = do
   case reads string of
-    [(result, _)] -> return result
+    [(result, _)] ->
+      Parser
+        ( \str ->
+            Right $ ParserSuccess {rest = str, consumedTokens = length string, result = result}
+        )
     _ -> abortParser "could not read value" 0
 
 bool :: Parser Bool
@@ -97,10 +101,15 @@ bool =
 string :: String -> Parser String
 string = mapM char
 
-{--
 span :: (Char -> Bool) -> Parser String
 span predicate = Parser $ \i ->
-  let (matched, rest) = Prelude.span predicate i in Right (rest, matched)
+  let (matched, rest) = Prelude.span predicate i
+   in Right $
+        ParserSuccess
+          { rest = rest,
+            consumedTokens = length matched,
+            result = matched
+          }
 
 alphaNum :: Parser String
 alphaNum = span isAlphaNum
@@ -109,6 +118,7 @@ stringLiteral :: Parser String
 stringLiteral = char '"' *> span (/= '"') <* char '"'
 
 --My code
+tagHelper :: Char -> Bool
 tagHelper c = (c /= '=') && (c /= '<') && (c /= '>')
 
 tag :: Parser String
@@ -129,16 +139,13 @@ noArrow =
     <$> cond (/= '<')
     <*> span (/= '<')
 
---end of my code
-
 natural :: Parser Integer
-natural = do
-  list <- reads <$> span isDigit
-  case list of
-    [(number, _)] -> return number
-    _ -> abortParser "could not parse number"
+natural = span isDigit >>= tryRead
 
-newLineOrSpace c = if isSpace c || (c == '\n') then True else False
+newLineOrSpace :: Char -> Bool
+newLineOrSpace c = isSpace c || (c == '\n')
+
+--end of my code
 
 ws :: Parser String
 ws = span isSpace
@@ -156,7 +163,7 @@ idP :: Parser ()
 idP = pure ()
 
 orChain :: Parser a
-orChain = abortParser "orChain parser invoked"
+orChain = abortParser "orChain parser invoked" 0
 
 integer :: Parser Integer
 integer =
@@ -189,8 +196,8 @@ intList' = list intList
 end :: Parser ()
 end = (*>) ws $
   Parser $ \case
-    [] -> Right ([], ())
-    _ -> abort "expected end of string"
+    [] -> Right $ ParserSuccess {rest = "", consumedTokens = 0, result = ()}
+    _ -> abort "expected end of string" 0
 
 class Parseable p where
   parser :: Parser p
@@ -217,7 +224,7 @@ parse :: Parseable p => String -> p
 parse input =
   case runParser parser input of
     Left err -> error $ show err
-    Right (_rest, value) -> value
+    Right (ParserSuccess _ _ value) -> value
 
 main'' :: IO ()
 main'' = do
@@ -239,4 +246,3 @@ main'' = do
 
   print $ runParser intList' "[ [12],  [ 54 , 23]  ]dsa"
   print $ runParser intList' "[ [12],  [ 54 , [23]  ]dsa"
---}
