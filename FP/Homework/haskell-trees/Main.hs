@@ -17,5 +17,6 @@ values Inorder (Node v l r) = values Inorder l ++ (v : values Inorder r)
 values Postorder (Node v l r) = values Postorder l ++ values Postorder r ++ [v]
 values Preorder (Node v l r) = (v : values Preorder l) ++ values Preorder r
 
+main :: IO ()
 main = do
   putStrLn "This is Main!"

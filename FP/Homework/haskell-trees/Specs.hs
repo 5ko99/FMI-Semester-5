@@ -1,4 +1,4 @@
-module TreeTests where
+module Specs where
 
 import Main
   ( Strategy (Inorder, Postorder, Preorder),
