@@ -58,6 +58,7 @@ textParser =
 xmlParser :: Parser XMLObject
 xmlParser = tagParser <|> textParser
 
+--test function
 test :: IO XMLObject
 test = do
   actualContent <- readFile "test-files/c.xml"
