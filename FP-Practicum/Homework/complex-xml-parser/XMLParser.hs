@@ -37,9 +37,9 @@ closingTagParser name = do
   closingName <- closingName
   char '>'
   ws
-  if closingName == name
+  if name == closingName
     then return name
-    else abortParser "String"
+    else abortParser "Error!" 0
 
 tagParser :: Parser XMLObject
 tagParser = do
@@ -58,8 +58,7 @@ textParser =
 xmlParser :: Parser XMLObject
 xmlParser = tagParser <|> textParser
 
-test :: IO XMLObject
+test :: IO (ParserResult XMLObject)
 test = do
-  actualContent <- readFile "test-files/e.xml"
-  let (Right res) = snd <$> runParser xmlParser actualContent
-    in return res
+  actualContent <- readFile "test-files/a.xml"
+  return $ runParser xmlParser actualContent
