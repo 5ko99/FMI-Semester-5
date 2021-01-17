@@ -24,3 +24,5 @@ tagElementToString (TagElement str atr xmlObj) =
 xmlToString :: XMLObject -> String
 xmlToString (Text text) = text
 xmlToString (Element el) = tagElementToString el
+
+

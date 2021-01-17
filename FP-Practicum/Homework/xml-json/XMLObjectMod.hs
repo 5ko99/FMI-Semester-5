@@ -1,4 +1,4 @@
-module XMLObject where
+module XMLObjectMod where
 
 type Attribute = (String, String)
 
@@ -12,4 +12,3 @@ data XMLObject
   = Text String
   | Element TagElement
   deriving (Show, Read, Eq)
-

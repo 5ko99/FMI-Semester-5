@@ -60,5 +60,5 @@ xmlParser = tagParser <|> textParser
 
 test :: IO (ParserResult XMLObject)
 test = do
-  actualContent <- readFile "test-files/a.xml"
+  actualContent <- readFile "test-files/res.xml"
   return $ runParser xmlParser actualContent
