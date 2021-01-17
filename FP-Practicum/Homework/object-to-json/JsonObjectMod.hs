@@ -1,4 +1,4 @@
-module JsonObjectClass where
+module JsonObjectMod where
     
 data JsonValue
   = JsonNull

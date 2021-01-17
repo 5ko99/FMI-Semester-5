@@ -1,6 +1,6 @@
-import ParserUtils
-import Data.Char
 import Control.Applicative
+import Data.Char
+import ParserUtils
 
 data JsonValue
   = JsonNull
@@ -13,12 +13,11 @@ data JsonValue
 
 jsonNull :: Parser JsonValue
 jsonNull = do
-    ws *> string "null" <* ws
-    return JsonNull
+  ws *> string "null" <* ws
+  return JsonNull
 
 jsonBool :: Parser JsonValue
 jsonBool = JsonBool <$> bool
-
 
 jsonString :: Parser JsonValue
 jsonString = JsonString <$> stringLiteral
@@ -52,7 +51,7 @@ jsonValue = jsonNull <|> jsonBool <|> jsonNumber <|> jsonString <|> jsonArray <|
 
 --test
 
-parseFile :: FilePath -> Parser a -> IO (ParserResult a)
-parseFile fileName parser = do
+parseFile :: FilePath -> IO (ParserResult JsonValue)
+parseFile fileName = do
   input <- readFile fileName
-  return $ runParser parser input
+  return $ runParser jsonValue input
