@@ -12,8 +12,6 @@ import Data.Char (isAlphaNum, isDigit, isLetter, isSpace, ord)
 import Prelude hiding (span)
 import qualified Prelude
 
---todo: Add float parser
-
 data ParserError = ParserError
   { msg :: String,
     pos :: Int
@@ -173,6 +171,21 @@ integer =
     *> natural
     <|> negate
     <$> (char '-' *> ws *> natural)
+
+--float
+float' :: Parser Float
+float' = do
+  firstPart <- integer
+  char '.'
+  secondPart <- natural
+  tryRead $ show firstPart ++ "." ++ show secondPart
+
+float :: Parser Float
+float = float' <|> fromIntegral <$> integer
+
+--sep By
+sepBy :: Parser a -> Parser b -> Parser [b]
+sepBy sep element = (:) <$> element <*> many (sep *> element) <|> pure []
 
 separated :: Parser a -> Parser b -> Parser [b]
 separated separator element =

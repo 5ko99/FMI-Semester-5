@@ -8,7 +8,7 @@ import Data.Char (isDigit, isSpace)
 data JsonValue
   = JsonNull
   | JsonBool Bool
-  | JsonNumber Integer -- Note: no support for floats
+  | JsonNumber Float -- Note: no support for floats
   | JsonString String
   | JsonArray [JsonValue]
   | JsonObject [(String, JsonValue)]
@@ -122,4 +122,3 @@ parseFile fileName parser = do
 
 main :: IO ()
 main = undefined
-
