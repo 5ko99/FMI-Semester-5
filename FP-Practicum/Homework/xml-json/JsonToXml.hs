@@ -40,6 +40,12 @@ jsonToXmlObjL (JsonArray arr) = jsonArrToXml arr
 jsonToXmlObjL (JsonObject arr) = jsonListToXml arr
 
 jsonToXml :: JsonValue -> XMLObject
-jsonToXml json = Element (TagElement "xml" [] lst)
+jsonToXml (JsonObject [(name, json@(JsonObject jv))]) = 
+  Element (TagElement name attributes lst)
+  where
+    attributes = getAttributes jv
+    lst = jsonToXmlObjL json
+jsonToXml json = 
+  Element (TagElement "xml" [] lst)
   where
     lst = jsonToXmlObjL json

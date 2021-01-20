@@ -1,7 +1,7 @@
 import XMLObject
 
 attributeToString :: Attribute -> [Char]
-attributeToString (a, b) = a ++ "=" ++ "\"" ++ b ++ "\""
+attributeToString (a, b) = ' ' : a ++ "=" ++ "\"" ++ b ++ "\""
 
 attributesToStrings :: [Attribute] -> [String]
 attributesToStrings = map attributeToString
@@ -15,14 +15,15 @@ attributesToString = stringsToString . attributesToStrings
 
 tagElementToString :: TagElement -> String
 tagElementToString (TagElement str atr xmlObj) =
-  "<" ++ str ++ " " ++ attributesToString atr ++ ">"
-    ++ stringsToString (map xmlToString xmlObj)
-    ++ "</"
-    ++ str
-    ++ ">"
+  if str /= "xml"
+    then
+      "<" ++ str ++ attributesToString atr ++ ">"
+        ++ stringsToString (map xmlToString xmlObj)
+        ++ "</"
+        ++ str
+        ++ ">"
+    else "<?xml version=\" 1.0 \" encoding=\" UTF -8 \" ?>"
 
 xmlToString :: XMLObject -> String
 xmlToString (Text text) = text
 xmlToString (Element el) = tagElementToString el
-
-
