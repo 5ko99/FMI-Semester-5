@@ -1,4 +1,10 @@
-import XMLObject
+module DeParser.XmlToString where
+
+import Data.XMLObject
+  ( Attribute,
+    TagElement (TagElement),
+    XMLObject (..),
+  )
 
 attributeToString :: Attribute -> [Char]
 attributeToString (a, b) = ' ' : a ++ "=" ++ "\"" ++ b ++ "\""
@@ -15,17 +21,11 @@ attributesToString = stringsToString . attributesToStrings
 
 tagElementToString :: TagElement -> String
 tagElementToString (TagElement str atr xmlObj) =
-  if str /= "xml"
-    then
-      "<" ++ str ++ attributesToString atr ++ ">"
-        ++ stringsToString (map xmlToString xmlObj)
-        ++ "</"
-        ++ str
-        ++ ">"
-    else
-      "<xml version=\" 1.0 \" encoding=\" UTF -8 \">"
-        ++ stringsToString (map xmlToString xmlObj)
-        ++ "</xml>"
+  "<" ++ str ++ attributesToString atr ++ ">"
+    ++ stringsToString (map xmlToString xmlObj)
+    ++ "</"
+    ++ str
+    ++ ">"
 
 xmlToString :: XMLObject -> String
 xmlToString (Text text) = text

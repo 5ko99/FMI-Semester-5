@@ -1,0 +1,1 @@
+Element (TagElement {name = "main", attributes = [], children = [Element (TagElement {name = "fruit", attributes = [], children = [Text "Apple"]}),Element (TagElement {name = "size", attributes = [], children = [Text "Large"]}),Element (TagElement {name = "color", attributes = [], children = [Text "Red"]})]})

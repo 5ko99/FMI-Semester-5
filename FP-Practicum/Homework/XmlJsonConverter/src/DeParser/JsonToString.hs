@@ -1,4 +1,6 @@
-import JsonObjectMod
+module DeParser.JsonToString where
+
+import Data.JsonObject ( JsonValue(..) )
 
 stringsToString :: [String] -> String
 stringsToString [] = ""
@@ -9,7 +11,7 @@ stringsToString (x : xs) = res
 jsonObjectToString :: [(String, JsonValue)] -> String
 jsonObjectToString [] = ""
 jsonObjectToString ((str, val) : xs) =
-  '{' : '"' : str ++ "\": {" ++ jsonValueToString val ++ "} " ++ (jsonObjectToString xs) ++ "}"
+  '{' : '"' : str ++ "\": {" ++ jsonValueToString val ++ "} " ++ jsonObjectToString xs ++ "}"
 
 jsonValueToString :: JsonValue -> String
 jsonValueToString JsonNull = "null"
