@@ -5,8 +5,9 @@ import Data.XMLObject
     TagElement (TagElement),
     XMLObject (..),
   )
+import Helper
 
-attributeToString :: Attribute -> [Char]
+attributeToString :: Attribute -> String
 attributeToString (a, b) = ' ' : a ++ "=" ++ "\"" ++ b ++ "\""
 
 attributesToStrings :: [Attribute] -> [String]
@@ -19,14 +20,16 @@ stringsToString (x : xs) = x ++ " " ++ stringsToString xs
 attributesToString :: [Attribute] -> String
 attributesToString = stringsToString . attributesToStrings
 
-tagElementToString :: TagElement -> String
-tagElementToString (TagElement str atr xmlObj) =
-  "<" ++ str ++ attributesToString atr ++ ">"
-    ++ stringsToString (map xmlToString xmlObj)
-    ++ "</"
-    ++ str
-    ++ ">"
+tagElementToString :: TagElement -> Either String String
+tagElementToString (TagElement str atr xmlObj) = do
+  others <- toEitherList (map xmlToString xmlObj)
+  return $
+    "<" ++ str ++ attributesToString atr ++ ">\n"
+      ++ stringsToString others
+      ++ "\n</"
+      ++ str
+      ++ ">"
 
-xmlToString :: XMLObject -> String
-xmlToString (Text text) = text
+xmlToString :: XMLObject -> Either String String
+xmlToString (Text text) = Right text
 xmlToString (Element el) = tagElementToString el

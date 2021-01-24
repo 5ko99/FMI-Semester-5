@@ -28,6 +28,11 @@ source-repository head
 library
   exposed-modules:
       Lib
+      Data.JsonObject
+      Data.XMLObject
+      Helper
+      Translation.ToJson
+      Translation.ToXml
   other-modules:
       Paths_XmlJsonConverter
   hs-source-dirs:
