@@ -6,25 +6,24 @@
 int main(int argc, char *argv[])
 {
     int stat;
-    char *path = argv[1];
-    char *params[10];
-    for (int i = 1; i < argc; ++i)
+    char *args[30];
+    for (int i = 0; i < argc-1; ++i)
     {
-        params[i - 1] = argv[i];
+        args[i] = argv[i+1];
     }
-    params[argc - 1] = 0;
+    args[argc-1] = NULL;
     int forkId = fork();
     if (forkId == 0)
     {
-        execvp(path, params);
+        execvp(args[0],args);
         perror("error!");
         exit(1);
     }
     else
     {
-        int cpid = wait(&stat);
-        printf("\nChild code after wait:%i\nWith status:%i \n",
-               cpid, stat);
+        wait(&stat);
+        printf("\nChild pid after wait:%i\nWith status:%i \n",
+               forkId, stat);
     }
     return 0;
 }

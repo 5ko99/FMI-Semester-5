@@ -1,0 +1,3 @@
+    PID TTY          TIME CMD
+  15025 pts/2    00:00:00 a.out
+  15026 pts/2    00:00:00 ps

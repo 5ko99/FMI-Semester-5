@@ -5,6 +5,7 @@
 #include <stdlib.h>
 int main(int argc, char *argv[])
 {
+    char *args[] = {"ls","-l",NULL};
     printf("This is process id:%i \n", getpid());
     printf("This is parent id:%i \n", getppid());
     int forkId = fork();
@@ -13,9 +14,9 @@ int main(int argc, char *argv[])
         printf("This is result of fork in child:%i \n", forkId);
         printf("This is process id in child after fork:%i \n", getpid());
         printf("This is parent id in child after fork:%i \n", getppid());
-        printf("This is the result of execlp with ls in child:%i \n", execlp("ls", "ls", NULL));
+        execvp(args[0],args);
         //If command is not successfully replaced, then exit code of a child will be 1, if is then 0
-        exit(-1);
+        exit(1);
     }
     else
     {
@@ -23,8 +24,8 @@ int main(int argc, char *argv[])
         printf("This is process id in parent after fork:%i \n", getpid());
         printf("This is parent id in parent after fork:%i \n", getppid());
         int stat;
-        int childIdAfterWait = wait(&stat);
-        printf("Child id after wait: %i \nChild status:%i \n", childIdAfterWait, WEXITSTATUS(stat));
+        wait(&stat);
+        printf("Child id after wait: %i \nChild status:%i \n", forkId, stat);
     }
     return 0;
 }

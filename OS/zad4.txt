@@ -10,6 +10,7 @@ Zad2.
 who | grep $user >/dev/null && write $user <$file
 
 Zad3.
+read file
 a=`wc -l < $file`
 b=`wc -w < $file`
 expr $b "/" $a

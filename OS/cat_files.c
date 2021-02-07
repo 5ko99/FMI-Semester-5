@@ -5,8 +5,9 @@
 #include <unistd.h>
 int main(int argc, char* argv[]) {
     char buf[1];
+    int open_file;
     for(int i=1; i < argc; ++i) {
-        int open_file = open(argv[i],O_RDONLY);
+        open_file = open(argv[i],O_RDONLY);
         if(open_file == -1) {
             perror(argv[i]);
         } else {

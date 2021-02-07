@@ -9,7 +9,7 @@ do
   then
     cp $var $HOME/$1
   else
-    num=`expr $num + 1 `
+    let num=$num+1
   fi
 done
 echo "Number of nonreadable files = $num" 

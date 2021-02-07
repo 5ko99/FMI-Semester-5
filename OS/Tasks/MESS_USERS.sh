@@ -1,3 +1,4 @@
+#!/bin/bash
 cat >msg
 for i in $*
 do
