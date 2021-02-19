@@ -38,6 +38,10 @@ int main(void)
   if (pid1>0) { /* process for cmd2 */
    close(fd[1]);  /* Close unused write end */
    dup2(fd[0],STDIN_FILENO);
+   //1. kopira lqvoto
+   //2. novoto kopie izpolzva nomera na dqsnoto
+   //3. zatvarq dqsnoto ako e bilo otvoreno
+   //vzima nomera na STDIN i kopira fd[0] kato novoto kopie prisvoqva na nomera na STDIN sled tova zatvarq stdin
    close(fd[0]);  /* Close duplicated read end */
    read(fd[2],buf,1);
    printf("%c",buf[1]);
